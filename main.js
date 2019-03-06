@@ -53,6 +53,12 @@ const itemControl = (function () {
 
          return found;
       },
+      updateItem: function (item, name, calories) {
+         calories = parseInt(calories);
+         item.name = name;
+         item.calories = calories;
+         UIControl.updateListItem(item);
+      },
       setCurrentItem: function (item) {
          data.currentItem = item;
       },
@@ -126,6 +132,20 @@ const UIControl = (function () {
          // Insert item
          document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
       },
+      updateListItem: function (item) {
+         const ID = item.id;
+         const oldItem = document.querySelector(`#item-${ID}`);
+
+         oldItem.outerHTML = 
+         `<li class="collection-item" id="item-${item.id}">
+         <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+         <a href="#" class="right">
+           <i class="edit-item fa fa-pencil"></i>
+         </a>
+       </li>`
+
+         console.log(oldItem);
+      },
       clearInput: function () {
          document.querySelector(UISelectors.itemNameInput).value = '';
          document.querySelector(UISelectors.itemCaloriesInput).value = '';
@@ -170,9 +190,18 @@ const appControl = (function (itemControl, UIControl) {
       // Add item event
       document.querySelector(UISelectors.addBtn).addEventListener('click', addItem);
 
+      // Disable submit on enter
+      document.addEventListener('keypress', function(e) {
+         if(e.keyCode === 13 || e.which === 13) {
+            e.preventDefault();
+            return false;
+         }
+      })
+
       // Edit item event
       document.querySelector(UISelectors.itemList).addEventListener('click', editItem);
 
+      // Update item event
       document.querySelector(UISelectors.updateBtn).addEventListener('click', updateItem);
    }
 
@@ -218,6 +247,15 @@ const appControl = (function (itemControl, UIControl) {
          // Add item to form
          UIControl.addCurrentItemToForm(itemControl.getCurrentItem());
       }
+      e.preventDefault();
+   }
+
+   const updateItem = function(e) {
+      const currentItemEdit = itemControl.getCurrentItem();
+      const itemInput = UIControl.getItemInput();
+
+      /* const updatedItem = */ itemControl.updateItem(currentItemEdit, itemInput.name, itemInput.calories);
+
       e.preventDefault();
    }
 
