@@ -172,6 +172,8 @@ const appControl = (function (itemControl, UIControl) {
 
       // Edit item event
       document.querySelector(UISelectors.itemList).addEventListener('click', editItem);
+
+      document.querySelector(UISelectors.updateBtn).addEventListener('click', updateItem);
    }
 
    // Add item submit
