@@ -142,9 +142,7 @@ const UIControl = (function () {
          <a href="#" class="right">
            <i class="edit-item fa fa-pencil"></i>
          </a>
-       </li>`
-
-         console.log(oldItem);
+       </li>`;
       },
       clearInput: function () {
          document.querySelector(UISelectors.itemNameInput).value = '';
@@ -254,7 +252,11 @@ const appControl = (function (itemControl, UIControl) {
       const currentItemEdit = itemControl.getCurrentItem();
       const itemInput = UIControl.getItemInput();
 
-      /* const updatedItem = */ itemControl.updateItem(currentItemEdit, itemInput.name, itemInput.calories);
+      itemControl.updateItem(currentItemEdit, itemInput.name, itemInput.calories);
+
+      const totalCalories = itemControl.getTotalCalories();
+
+      UIControl.displayCalories(totalCalories);
 
       e.preventDefault();
    }
