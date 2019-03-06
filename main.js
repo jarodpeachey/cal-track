@@ -1,6 +1,5 @@
 // Storage Controller
-alert('Please do this a lot');
-alert('This too!')
+
 
 // Item Controller
 const itemControl = (function () {
