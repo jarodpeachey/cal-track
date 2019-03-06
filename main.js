@@ -53,6 +53,9 @@ const itemControl = (function () {
 
          return found;
       },
+      setCurrentItem: function (item) {
+         data.currentItem = item;
+      },
       getTotalCalories: () => {
          let total = 0;
          data.items.forEach((item) => {
@@ -194,7 +197,8 @@ const appControl = (function (itemControl, UIControl) {
          // Get item
          const itemToEdit = itemControl.getItemById(id);
 
-         console.log(itemToEdit);
+         // Set current item
+         itemControl.setCurrentItem(itemToEdit);
       }
       e.preventDefault();
    }
