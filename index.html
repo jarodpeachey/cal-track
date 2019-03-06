@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Calorie Tracker</title>
+   <link rel="stylesheet" href="../Peach.css/breeze.css">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous">
+</head>
+
+<body>
+   <nav class="bg-primary">
+      <div class="container p-0">
+         <div class="row mobile v-align-center">
+            <div class="col-4 col">
+               <h2 class="m-0">CalTrack</h2>
+            </div>
+            <div class="col col-8">
+               <button class="primary float-right">Clear all</button>
+            </div>
+         </div>
+      </div>
+   </nav>
+   <section>
+      <div class="container">
+         <div class="bg-light" style="max-width: 800px; margin: 0 auto;">
+            <div class="p-3">
+               <h3>Add meal / Item</h3>
+               <form action="">
+                  <div class="row mobile-lg">
+                     <div class="col-6 col">
+                        <div class="input-element medium">
+                           <label for="">Meal</label>
+                           <input class="full-width" type="text" id="item-name" placeholder="Add item...">
+                        </div>
+                     </div>
+                     <div class="col-6 col">
+                        <div class="input-element medium">
+                           <label for="">Calories</label>
+                           <input class="full-width" type="number" placeholder="Add calories" id="item-calories">
+                        </div>
+                     </div>
+                  </div>
+
+                  <button class="add-btn accent"><i class="fa fa-plus"></i> Add Meal</button>
+                  <!-- <button class="update-btn light"><i class="fa fa-pencil-square-o"></i> Update Meal</button>
+                  <button class="delete-btn danger"><i class="fa fa-remove"></i> Delete Meal</button>
+                  <button class="back-btn light float-right"><i class="fa fa-chevron-circle-left"></i> Back</button> -->
+               </form>
+            </div>
+         </div>
+         <h2 class="center-text py-3">Total Calories: <span class="total-calories"></span></h2>
+
+         <ul id="item-list" class="collection">
+
+         </ul>
+      </div>
+   </section>
+   <script src="main.js"></script>
+</body>
+
+</html>
