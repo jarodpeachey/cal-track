@@ -42,6 +42,17 @@ const itemControl = (function () {
 
          return newItem;
       },
+      getItemById: function (id) {
+         let found = null;
+         // Loop throught the items
+         data.items.forEach(function(item) {
+            if (item.id === id) {
+               found = item;
+            };
+         })
+
+         return found;
+      },
       getTotalCalories: () => {
          let total = 0;
          data.items.forEach((item) => {
@@ -175,7 +186,15 @@ const appControl = (function (itemControl, UIControl) {
    const editItem = function(e) {
       const target = e.target;
       if (e.target.classList.contains('edit-item')) {
-         alert('Edit item');
+         const listID = e.target.parentNode.parentNode.id;
+         const listIDArray = listID.split('-');
+         console.log(listIDArray);
+         const id = parseInt(listIDArray[1]);
+
+         // Get item
+         const itemToEdit = itemControl.getItemById(id);
+
+         console.log(itemToEdit);
       }
       e.preventDefault();
    }
