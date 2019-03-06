@@ -45,7 +45,7 @@ const itemControl = (function () {
       getItemById: function (id) {
          let found = null;
          // Loop throught the items
-         data.items.forEach(function(item) {
+         data.items.forEach(function (item) {
             if (item.id === id) {
                found = item;
             };
@@ -58,7 +58,7 @@ const itemControl = (function () {
 
          let found = null;
 
-         data.items.forEach(function(item) {
+         data.items.forEach(function (item) {
             if (item.id === data.currentItem.id) {
                item.name = name;
                item.calories = calories;
@@ -154,8 +154,8 @@ const UIControl = (function () {
       updateItem: function (item) {
          const oldItem = document.querySelector(`#item-${item.id}`);
 
-         oldItem.outerHTML = 
-         `<li class="collection-item" id="item-${item.id}">
+         oldItem.outerHTML =
+            `<li class="collection-item" id="item-${item.id}">
          <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
          <a href="#" class="right">
            <i class="edit-item fa fa-pencil"></i>
@@ -168,14 +168,14 @@ const UIControl = (function () {
       displayCalories: function (totalCalories) {
          document.querySelector(UISelectors.caloriesOutput).innerHTML = totalCalories;
       },
-      clearEditState: function() {
+      clearEditState: function () {
          UIControl.clearInput();
          document.querySelector(UISelectors.updateBtn).style.display = 'none';
          document.querySelector(UISelectors.deleteBtn).style.display = 'none';
          document.querySelector(UISelectors.backBtn).style.display = 'none';
          document.querySelector(UISelectors.addBtn).style.display = 'inline';
       },
-      showEditState: function() {
+      showEditState: function () {
          document.querySelector(UISelectors.updateBtn).style.display = 'inline';
          document.querySelector(UISelectors.deleteBtn).style.display = 'inline';
          document.querySelector(UISelectors.backBtn).style.display = 'inline';
@@ -229,7 +229,7 @@ const appControl = (function (itemControl, UIControl) {
    }
 
    // Edit and update item
-   const editItem = function(e) {
+   const editItem = function (e) {
       if (e.target.classList.contains('edit-item')) {
          const listID = e.target.parentNode.parentNode.id;
          const listIDArray = listID.split('-');
@@ -247,6 +247,7 @@ const appControl = (function (itemControl, UIControl) {
       e.preventDefault();
    }
 
+   // Update function
    const updateItem = function (e) {
       const input = UIControl.getItemInput();
 
