@@ -1,3 +1,3 @@
 # CalTrack Calories Tracker
 
-From Brad Traversy's Modern Javascript course on Udemy
+From Brad Traversy's Modern Javascript course on Udemy.
