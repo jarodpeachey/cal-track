@@ -58,7 +58,7 @@ const itemControl = (function () {
       },
       getCurrentItem: function () {
          return data.currentItem;
-      }
+      },
       getTotalCalories: () => {
          let total = 0;
          data.items.forEach((item) => {
@@ -130,9 +130,11 @@ const UIControl = (function () {
          document.querySelector(UISelectors.itemNameInput).value = '';
          document.querySelector(UISelectors.itemCaloriesInput).value = '';
       },
-      addCurrentItem: function () {
-         document.querySelector(UISelectors.itemNameInput).value = itemControl.getCurrentItem().name;
-         document.querySelector(UISelectors.itemCaloriesInput).value = itemControl.getCurrentItem().calories;
+      addCurrentItemToForm: function (item) {
+         console.log(item.name);
+         document.querySelector(UISelectors.itemNameInput).value = item.name;
+         document.querySelector(UISelectors.itemCaloriesInput).value = item.calories;
+         UIControl.showEditState();
       },
       getSelectors: function () {
          return UISelectors;
@@ -146,6 +148,12 @@ const UIControl = (function () {
          document.querySelector(UISelectors.deleteBtn).style.display = 'none';
          document.querySelector(UISelectors.backBtn).style.display = 'none';
          document.querySelector(UISelectors.addBtn).style.display = 'inline';
+      },
+      showEditState: function() {
+         document.querySelector(UISelectors.updateBtn).style.display = 'inline';
+         document.querySelector(UISelectors.deleteBtn).style.display = 'inline';
+         document.querySelector(UISelectors.backBtn).style.display = 'inline';
+         document.querySelector(UISelectors.addBtn).style.display = 'none';
       }
    }
 })();
@@ -194,11 +202,9 @@ const appControl = (function (itemControl, UIControl) {
 
    // Edit and update item
    const editItem = function(e) {
-      const target = e.target;
       if (e.target.classList.contains('edit-item')) {
          const listID = e.target.parentNode.parentNode.id;
          const listIDArray = listID.split('-');
-         console.log(listIDArray);
          const id = parseInt(listIDArray[1]);
 
          // Get item
@@ -208,7 +214,7 @@ const appControl = (function (itemControl, UIControl) {
          itemControl.setCurrentItem(itemToEdit);
 
          // Add item to form
-         UIControl.addCurrentItem();
+         UIControl.addCurrentItemToForm(itemControl.getCurrentItem());
       }
       e.preventDefault();
    }
