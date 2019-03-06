@@ -56,6 +56,9 @@ const itemControl = (function () {
       setCurrentItem: function (item) {
          data.currentItem = item;
       },
+      getCurrentItem: function () {
+         return data.currentItem;
+      }
       getTotalCalories: () => {
          let total = 0;
          data.items.forEach((item) => {
@@ -126,6 +129,10 @@ const UIControl = (function () {
       clearInput: function () {
          document.querySelector(UISelectors.itemNameInput).value = '';
          document.querySelector(UISelectors.itemCaloriesInput).value = '';
+      },
+      addCurrentItem: function () {
+         document.querySelector(UISelectors.itemNameInput).value = itemControl.getCurrentItem().name;
+         document.querySelector(UISelectors.itemCaloriesInput).value = itemControl.getCurrentItem().calories;
       },
       getSelectors: function () {
          return UISelectors;
@@ -199,6 +206,9 @@ const appControl = (function (itemControl, UIControl) {
 
          // Set current item
          itemControl.setCurrentItem(itemToEdit);
+
+         // Add item to form
+         UIControl.addCurrentItem();
       }
       e.preventDefault();
    }
