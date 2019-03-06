@@ -53,11 +53,20 @@ const itemControl = (function () {
 
          return found;
       },
-      updateItem: function (item, name, calories) {
+      updateItem: function (name, calories) {
          calories = parseInt(calories);
-         item.name = name;
-         item.calories = calories;
-         UIControl.updateListItem(item);
+
+         let found = null;
+
+         data.items.forEach(function(item) {
+            if (item.id === data.currentItem.id) {
+               item.name = name;
+               item.calories = calories;
+               found = item;
+            }
+         });
+
+         return found;
       },
       setCurrentItem: function (item) {
          data.currentItem = item;
@@ -132,18 +141,6 @@ const UIControl = (function () {
          // Insert item
          document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
       },
-      updateListItem: function (item) {
-         const ID = item.id;
-         const oldItem = document.querySelector(`#item-${ID}`);
-
-         oldItem.outerHTML = 
-         `<li class="collection-item" id="item-${item.id}">
-         <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
-         <a href="#" class="right">
-           <i class="edit-item fa fa-pencil"></i>
-         </a>
-       </li>`;
-      },
       clearInput: function () {
          document.querySelector(UISelectors.itemNameInput).value = '';
          document.querySelector(UISelectors.itemCaloriesInput).value = '';
@@ -153,6 +150,17 @@ const UIControl = (function () {
          document.querySelector(UISelectors.itemNameInput).value = item.name;
          document.querySelector(UISelectors.itemCaloriesInput).value = item.calories;
          UIControl.showEditState();
+      },
+      updateItem: function (item) {
+         const oldItem = document.querySelector(`#item-${item.id}`);
+
+         oldItem.outerHTML = 
+         `<li class="collection-item" id="item-${item.id}">
+         <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+         <a href="#" class="right">
+           <i class="edit-item fa fa-pencil"></i>
+         </a>
+       </li>`;
       },
       getSelectors: function () {
          return UISelectors;
@@ -188,18 +196,9 @@ const appControl = (function (itemControl, UIControl) {
       // Add item event
       document.querySelector(UISelectors.addBtn).addEventListener('click', addItem);
 
-      // Disable submit on enter
-      document.addEventListener('keypress', function(e) {
-         if(e.keyCode === 13 || e.which === 13) {
-            e.preventDefault();
-            return false;
-         }
-      })
-
       // Edit item event
       document.querySelector(UISelectors.itemList).addEventListener('click', editItem);
 
-      // Update item event
       document.querySelector(UISelectors.updateBtn).addEventListener('click', updateItem);
    }
 
@@ -248,15 +247,16 @@ const appControl = (function (itemControl, UIControl) {
       e.preventDefault();
    }
 
-   const updateItem = function(e) {
-      const currentItemEdit = itemControl.getCurrentItem();
-      const itemInput = UIControl.getItemInput();
+   const updateItem = function (e) {
+      const input = UIControl.getItemInput();
 
-      itemControl.updateItem(currentItemEdit, itemInput.name, itemInput.calories);
+      const updatedItem = itemControl.updateItem(input.name, input.calories);
 
-      const totalCalories = itemControl.getTotalCalories();
+      UIControl.updateItem(updatedItem);
 
-      UIControl.displayCalories(totalCalories);
+      const updatedCalories = itemControl.getTotalCalories();
+
+      UIControl.displayCalories(updatedCalories);
 
       e.preventDefault();
    }
