@@ -140,6 +140,9 @@ const appControl = (function (itemControl, UIControl) {
 
       // Add item event
       document.querySelector(UISelectors.addBtn).addEventListener('click', addItem);
+
+      // Edit item event
+      document.querySelector(UISelectors.itemList).addEventListener('click', editItem);
    }
 
    // Add item submit
@@ -165,6 +168,15 @@ const appControl = (function (itemControl, UIControl) {
          UIControl.clearInput();
       }
 
+      e.preventDefault();
+   }
+
+   // Edit and update item
+   const editItem = function(e) {
+      const target = e.target;
+      if (e.target.classList.contains('edit-item')) {
+         alert('Edit item');
+      }
       e.preventDefault();
    }
 
