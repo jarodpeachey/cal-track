@@ -83,6 +83,13 @@ const itemControl = (function () {
 
          return itemToDelete;
       },
+      deleteAllItems: async function () {
+         if (confirm('Are you sure you want to delete all items?')) {
+            data.items.splice(0);
+         }
+
+         await console.log(data.items);
+      },
       setCurrentItem: function (item) {
          data.currentItem = item;
       },
@@ -111,6 +118,7 @@ const UIControl = (function () {
       deleteBtn: '.delete-btn',
       updateBtn: '.update-btn',
       backBtn: '.back-btn',
+      clearBtn: '.clear-btn',
       itemNameInput: '#item-name',
       itemCaloriesInput: '#item-calories',
       caloriesOutput: '.total-calories'
@@ -161,7 +169,6 @@ const UIControl = (function () {
          document.querySelector(UISelectors.itemCaloriesInput).value = '';
       },
       addCurrentItemToForm: function (item) {
-         console.log(item.name);
          document.querySelector(UISelectors.itemNameInput).value = item.name;
          document.querySelector(UISelectors.itemCaloriesInput).value = item.calories;
          UIControl.showEditState();
@@ -192,6 +199,9 @@ const UIControl = (function () {
 
          // Clear edit state
          UIControl.clearEditState();
+      },
+      deleteAllItems: function () {
+         alert('You need to delete the UI items, Jarod');
       },
       getSelectors: function () {
          return UISelectors;
@@ -235,6 +245,8 @@ const appControl = (function (itemControl, UIControl) {
       document.querySelector(UISelectors.backBtn).addEventListener('click', backButtonFunc);
 
       document.querySelector(UISelectors.deleteBtn).addEventListener('click', deleteItem);
+
+      document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItems);
    }
 
    // Add item submit
@@ -325,7 +337,23 @@ const appControl = (function (itemControl, UIControl) {
       // Delete from UI
       UIControl.deleteItem(itemToDelete);
 
-      console.log(itemToDelete);
+      // Update calories
+      const updatedCalories = itemControl.getTotalCalories();
+
+      UIControl.displayCalories(updatedCalories);
+
+      e.preventDefault();
+   }
+
+   const clearAllItems = function (e) {
+      itemControl.deleteAllItems();
+
+      UIControl.deleteAllItems();
+
+      // Update calories
+      const updatedCalories = itemControl.getTotalCalories();
+
+      UIControl.displayCalories(updatedCalories);
 
       e.preventDefault();
    }
