@@ -1,10 +1,7 @@
-// Storage Controller
-
-
 // Item Controller
 const itemControl = (function () {
    // Item Constructor
-   const Item = function (id, name, calories, update) {
+   const Item = function (id, name, calories) {
       this.id = id;
       this.name = name;
       this.calories = calories;
