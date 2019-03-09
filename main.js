@@ -177,6 +177,16 @@ const UIControl = (function () {
          </a>
        </li>`;
       },
+      deleteItem: function (item) {
+         const UIItem = document.querySelector(`#item-${item.id}`);
+
+         if (confirm(`Are you sure you want to delete the item ${item.name}?`)) {
+            UIItem.remove();
+            alert('Item was deleted successfully');
+         }
+
+         UIControl.clearEditState();
+      },
       getSelectors: function () {
          return UISelectors;
       },
