@@ -259,6 +259,8 @@ const appControl = (function (itemControl, UIControl) {
 
       UIControl.displayCalories(updatedCalories);
 
+      UIControl.clearInput();
+
       e.preventDefault();
    }
 
