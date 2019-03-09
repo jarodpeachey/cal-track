@@ -4,7 +4,7 @@
 // Item Controller
 const itemControl = (function () {
    // Item Constructor
-   const Item = function (id, name, calories) {
+   const Item = function (id, name, calories, update) {
       this.id = id;
       this.name = name;
       this.calories = calories;
@@ -191,9 +191,13 @@ const UIControl = (function () {
          // Confirm delete from user
          if (confirm(`Are you sure you want to delete the item ${item.name}?`)) {
             UIItem.remove();
-            setTimeout(() => {
-               document.getElementById('warning-box').style.display = 'block';
-               document.getElementById('warning-box').innerHTML = 'Item was succesfully deleted';
+
+            document.getElementById('warning-box').style.display = 'block';
+            document.getElementById('warning-box').innerHTML = 'Item was succesfully deleted';
+
+            setTimeout(function () {
+               document.getElementById('warning-box').style.display = 'none';
+               document.getElementById('warning-box').innerHTML = '';
             }, 2000);
          }
 
@@ -203,7 +207,7 @@ const UIControl = (function () {
       deleteAllItems: function () {
          const UIlist = document.querySelector(UISelectors.itemList);
 
-         for(i = 0; i < UIlist.children.length; i++) {
+         for (i = 0; i < UIlist.children.length; i++) {
             UIlist.children[i].remove();
          }
       },
