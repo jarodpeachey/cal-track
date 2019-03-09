@@ -68,6 +68,21 @@ const itemControl = (function () {
 
          return found;
       },
+      deleteItem: function (id) {
+         // const ids = data.items.map(function(item) {
+         //    return item.id;
+         // });
+         let itemToDelete = '';
+
+         data.items.forEach(function(item, index) {
+            if (item.id == id) {
+               itemToDelete = data.items[index];
+               data.items.splice(index, 1);  
+            }
+         })
+
+         return itemToDelete;
+      },
       setCurrentItem: function (item) {
          data.currentItem = item;
       },
@@ -202,6 +217,8 @@ const appControl = (function (itemControl, UIControl) {
       document.querySelector(UISelectors.updateBtn).addEventListener('click', updateItem);
 
       document.querySelector(UISelectors.backBtn).addEventListener('click', backButtonFunc);
+
+      document.querySelector(UISelectors.deleteBtn).addEventListener('click', deleteItem);
    }
 
    // Add item submit
@@ -275,11 +292,21 @@ const appControl = (function (itemControl, UIControl) {
    }
 
    // Back button / clear edit state
-   const backButtonFunc = (e) => {
+   const backButtonFunc = function (e) {
       e.preventDefault();
 
       // Clear edit state
       UIControl.clearEditState();
+   }
+
+   const deleteItem = function (e) {
+      // Get current item
+      const currentItem = itemControl.getCurrentItem();
+
+      // Delete from data structure
+      itemControl.deleteItem(currentItem.id);
+      
+      e.preventDefault();
    }
 
    // Public methods
