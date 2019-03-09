@@ -201,7 +201,11 @@ const UIControl = (function () {
          UIControl.clearEditState();
       },
       deleteAllItems: function () {
-         alert('You need to delete the UI items, Jarod');
+         const UIlist = document.querySelector(UISelectors.itemList);
+
+         for(i = 0; i < UIlist.children.length; i++) {
+            UIlist.children[i].remove();
+         }
       },
       getSelectors: function () {
          return UISelectors;
@@ -346,8 +350,10 @@ const appControl = (function (itemControl, UIControl) {
    }
 
    const clearAllItems = function (e) {
+      // Delete from data
       itemControl.deleteAllItems();
 
+      // Delete from UI
       UIControl.deleteAllItems();
 
       // Update calories
