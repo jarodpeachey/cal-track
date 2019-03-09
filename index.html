@@ -12,54 +12,30 @@
 </head>
 
 <body>
-   <nav class="bg-primary">
-      <div class="container p-0">
-         <div class="row mobile v-align-center">
-            <div class="col-4 col">
-               <h2 class="m-0">CalTrack</h2>
-            </div>
-            <div class="col col-8">
-               <button class="primary float-right clear-btn">Clear all</button>
-            </div>
+   <nav class="navbar bg-dark">
+      <div class="row v-align-center px-3">
+         <div class="center-text col">
+            <h1 class="m-0 pt-1 tablet-p-0">CalTrack</h1>
          </div>
+            <div class="row v-align-center col mobile-center-text pb-2 tablet-p-0">
+               <button class="dark">Button</button>
+               <button class="dark">Button</button>
+               <button class="dark">Button</button>
+            </div>
       </div>
    </nav>
-   <section>
+   </nav>
+   <section class="bg-primary">
       <div class="container">
-         <div class="bg-light" style="max-width: 800px; margin: 0 auto;">
-            <div class="p-3">
-               <div id="warning-box" style="color: #ce1c2e;
-               background-color: #eebabe; padding: 10px; border-radius: 4px; display: none;"></div>
-               <h3>Add meal / Item</h3>
-               <form action="">
-                  <div class="row mobile-lg">
-                     <div class="col-6 col">
-                        <div class="input-element medium">
-                           <label for="">Meal</label>
-                           <input class="full-width" type="text" id="item-name" placeholder="Add item...">
-                        </div>
-                     </div>
-                     <div class="col-6 col">
-                        <div class="input-element medium">
-                           <label for="">Calories</label>
-                           <input class="full-width" type="number" placeholder="Add calories" id="item-calories">
-                        </div>
-                     </div>
-                  </div>
-
-                  <button class="add-btn link"><i class="fa fa-plus"></i> Add Meal</button>
-                  <button class="update-btn accent"><i class="fa fa-pencil-square-o"></i> Update Meal</button>
-                  <button class="delete-btn danger"><i class="fa fa-remove"></i> Delete Meal</button>
-                  <button class="back-btn light float-right"><i class="fa fa-chevron-circle-left"></i> Back</button>
-               </form>
+         <div id="output">
+            <div class="center-text">
+               <h1>
+                  <i class="fas fa-chevron-right fa-4x"></i>
+                  <h3>Step up your health game with caltrack. Enter your information for daily and weekly health
+                     updates.</h3>
+               </h1>
             </div>
          </div>
-         <h2 class="center-text py-3">Total Calories: <span class="total-calories"></span></h2>
-
-         <ul id="item-list" class="collection">
-
-         </ul>
-      </div>
    </section>
    <script src="main.js"></script>
 </body>
