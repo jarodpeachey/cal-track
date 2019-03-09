@@ -200,6 +200,8 @@ const appControl = (function (itemControl, UIControl) {
       document.querySelector(UISelectors.itemList).addEventListener('click', editItem);
 
       document.querySelector(UISelectors.updateBtn).addEventListener('click', updateItem);
+
+      document.querySelector(UISelectors.backBtn).addEventListener('click', backButtonFunc);
    }
 
    // Add item submit
@@ -249,19 +251,35 @@ const appControl = (function (itemControl, UIControl) {
 
    // Update function
    const updateItem = function (e) {
+      // Get the new inputs
       const input = UIControl.getItemInput();
 
+      // Add updated item class
       const updatedItem = itemControl.updateItem(input.name, input.calories);
 
+      // Update item in UI
       UIControl.updateItem(updatedItem);
 
+      // Update calories
       const updatedCalories = itemControl.getTotalCalories();
 
       UIControl.displayCalories(updatedCalories);
 
+      // Clear input fields
       UIControl.clearInput();
 
+      // Clear edit state buttons
+      UIControl.clearEditState();
+
       e.preventDefault();
+   }
+
+   // Back button / clear edit state
+   const backButtonFunc = (e) => {
+      e.preventDefault();
+
+      // Clear edit state
+      UIControl.clearEditState();
    }
 
    // Public methods
