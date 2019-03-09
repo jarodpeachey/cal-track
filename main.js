@@ -304,7 +304,12 @@ const appControl = (function (itemControl, UIControl) {
       const currentItem = itemControl.getCurrentItem();
 
       // Delete from data structure
-      itemControl.deleteItem(currentItem.id);
+      const itemToDelete = itemControl.deleteItem(currentItem.id);
+
+      // Delete from UI
+      UIControl.deleteItem(itemToDelete);
+
+      console.log(itemToDelete);
       
       e.preventDefault();
    }
