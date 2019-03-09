@@ -74,10 +74,10 @@ const itemControl = (function () {
          // });
          let itemToDelete = '';
 
-         data.items.forEach(function(item, index) {
+         data.items.forEach(function (item, index) {
             if (item.id == id) {
                itemToDelete = data.items[index];
-               data.items.splice(index, 1);  
+               data.items.splice(index, 1);
             }
          })
 
@@ -178,13 +178,19 @@ const UIControl = (function () {
        </li>`;
       },
       deleteItem: function (item) {
+         // Get UI item to delete
          const UIItem = document.querySelector(`#item-${item.id}`);
 
+         // Confirm delete from user
          if (confirm(`Are you sure you want to delete the item ${item.name}?`)) {
             UIItem.remove();
-            alert('Item was deleted successfully');
+            setTimeout(() => {
+               document.getElementById('warning-box').style.display = 'block';
+               document.getElementById('warning-box').innerHTML = 'Item was succesfully deleted';
+            }, 2000);
          }
 
+         // Clear edit state
          UIControl.clearEditState();
       },
       getSelectors: function () {
@@ -320,7 +326,7 @@ const appControl = (function (itemControl, UIControl) {
       UIControl.deleteItem(itemToDelete);
 
       console.log(itemToDelete);
-      
+
       e.preventDefault();
    }
 
