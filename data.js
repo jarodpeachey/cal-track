@@ -47,6 +47,16 @@ const storageControl = (function () {
          usersArray.push(user);
 
          localStorage.setItem('users', JSON.stringify(usersArray));
+      },
+      getUsers: function () {
+         let users = [];
+         if (JSON.parse(localStorage.getItem('users' === null))) {
+            users = [];
+         } else {
+            users = JSON.parse(localStorage.getItem(`users`));
+         }
+
+         return users;
       }
    }
 })()
