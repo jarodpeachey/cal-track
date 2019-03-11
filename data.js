@@ -8,7 +8,8 @@ const mainDataControl = (function () {
    }
 
    const data = {
-      users: []
+      users: [],
+      currentUser: {}
    }
 
    return {
@@ -29,6 +30,12 @@ const mainDataControl = (function () {
 
          // Return newUser
          return newUser;
+      },
+      setCurrentUser: function(user) {
+         data.currentUser = user;
+      },
+      getCurrentUser: function() {
+         return data.currentUser;
       }
    }
 })()

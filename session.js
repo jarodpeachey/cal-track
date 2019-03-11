@@ -1,14 +1,14 @@
 const sessionUIControl = (function () {
    return {
-      displayDashboard: function () {
-         alert('This works')
+      displayDashboard: function (currentUser) {
+         console.log(currentUser);
          let container = document.getElementById('container');
 
          container.innerHTML = `
-         <div class="row">
+         <div class="row bg-primary">
          <div class="col col-12">
-            <div class="center-text bg-primary p-4">
-               <h2 class="m-0">Welcome, Jarod! Get started by adding a meal or a workout.</h2>
+            <div class="center-text p-4">
+               <h2 class="m-0">Welcome, ${currentUser.name}! Get started by adding a meal or a workout.</h2>
                <button class="accent mt-2">Add Meal</button>
                <button class="accent">Add Workout</button>
             </div>
@@ -55,19 +55,16 @@ const sessionUIControl = (function () {
 })()
 
 const sessionControl = (function (sessionUIControl) {
-   const loadEventListeners = function () {
-
-   }
-
    return {
       startNewSession: function (user) {
-         window.location.href = 'session.html';
-         
-         loadEventListeners();
+         // Set current user
+         mainDataControl.setCurrentUser(user);
 
-         console.log(`A new session has been started for ${user.name}`);
+         // Get current user
+         const currentUser = mainDataControl.getCurrentUser();
 
-         sessionUIControl.displayDashboard();
+         // Display user dashboard
+         sessionUIControl.displayDashboard(currentUser);
       }
    }
 })(sessionUIControl)
