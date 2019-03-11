@@ -12,7 +12,6 @@ const loginControl = (function() {
 
       users.forEach(function (user) {
          if (user.username == username && user.password == password) {
-            window.location.href = 'session.html';
             sessionControl.startNewSession(user);
          } else {
             alert('The username/password is incorrect. Please try again.');
