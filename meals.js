@@ -34,9 +34,6 @@ const itemControl = (function () {
          // Create new item
          newItem = new Item(ID, name, calories);
 
-         // Add to items array
-         data.items.push(newItem);
-
          return newItem;
       },
       getItemById: function (id) {
@@ -233,7 +230,7 @@ const UIControl = (function () {
 
 
 // App Controller
-const appControl = (function (itemControl, UIControl) {
+const appControl = (function (itemControl, UIControl, mainDataControl) {
    // Load event listeners
    const loadEventListeners = function () {
       // Get UI selectors
@@ -272,6 +269,12 @@ const appControl = (function (itemControl, UIControl) {
 
          // Display calories
          UIControl.displayCalories(totalCalories);
+
+         // Update main user data structure
+         mainDataControl.updateUserMeals(newItem);
+
+         // Update calories data structure
+         mainDataControl.updateUserCalories();
 
          // Clear fields
          UIControl.clearInput();
@@ -388,7 +391,9 @@ const appControl = (function (itemControl, UIControl) {
       }
    }
 
-})(itemControl, UIControl);
+})(itemControl, UIControl, mainDataControl);
 
 // Initialize App
 appControl.init();
+
+console.log('On page startup, current user is', mainDataControl.getCurrentUser());

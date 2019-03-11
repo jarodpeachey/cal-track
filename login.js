@@ -1,4 +1,4 @@
-const loginControl = (function() {
+const loginControl = (function () {
    const loadEventListeners = function () {
       document.getElementById('loginBtn').addEventListener('click', logIn);
    }
@@ -12,7 +12,16 @@ const loginControl = (function() {
 
       users.forEach(function (user) {
          if (user.username == username && user.password == password) {
-            sessionControl.startNewSession(user);
+            // Set current user
+            mainDataControl.setCurrentUser(user);
+
+            // Get current user
+            const currentUser = mainDataControl.getCurrentUser();
+
+            // Display user dashboard
+            sessionUIControl.displayDashboard(user);
+
+            sessionControl.startNewSession();
          } else {
             alert('The username/password is incorrect. Please try again.');
          }
@@ -22,7 +31,7 @@ const loginControl = (function() {
    };
 
    return {
-      init: function() {
+      init: function () {
          loadEventListeners();
       }
    }
