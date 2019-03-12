@@ -209,8 +209,8 @@ const mainDataControl = (function () {
 
          usersArray.forEach(function(user) {
             if (user.id == currentUser.id) {
-               user.meals = [];
-               currentUser.meals = [];
+               user.workouts = [];
+               currentUser.workouts = [];
             }
          })
 
