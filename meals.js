@@ -9,7 +9,6 @@ const itemControl = (function () {
 
    // Data Structure / State
    const data = {
-      items: [],
       currentItem: null,
       totalCalories: 0
    }
@@ -17,13 +16,16 @@ const itemControl = (function () {
    // Public methods
    return {
       getItems: function () {
-         return data.items;
+         let items = mainDataControl.getCurrentUser().meals;
+         return items;
       },
       addItem: function (name, calories) {
+         let items = mainDataControl.getCurrentUser().meals;
+
          let ID;
          // Create ID
-         if (data.items.length > 0) {
-            ID = data.items[data.items.length - 1].id + 1;
+         if (items.length > 0) {
+            ID = items[items.length - 1].id + 1;
          } else {
             ID = 0;
          }
@@ -37,9 +39,10 @@ const itemControl = (function () {
          return newItem;
       },
       getItemById: function (id) {
+         let items = mainDataControl.getCurrentUser().meals;
          let found = null;
          // Loop throught the items
-         data.items.forEach(function (item) {
+         items.forEach(function (item) {
             if (item.id === id) {
                found = item;
             };
@@ -48,11 +51,12 @@ const itemControl = (function () {
          return found;
       },
       updateItem: function (name, calories) {
+         let items = mainDataControl.getCurrentUser().meals;
          calories = parseInt(calories);
 
          let found = null;
 
-         data.items.forEach(function (item) {
+         items.forEach(function (item) {
             if (item.id === data.currentItem.id) {
                item.name = name;
                item.calories = calories;
@@ -86,6 +90,7 @@ const itemControl = (function () {
       },
       setCurrentItem: function (item) {
          data.currentItem = item;
+         console.log(data.currentItem);
       },
       getCurrentItem: function () {
          return data.currentItem;
@@ -240,7 +245,7 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
       document.querySelector(UISelectors.addBtn).addEventListener('click', addItem);
 
       // Edit item event
-      document.querySelector(UISelectors.itemList).addEventListener('click', editItem);
+      document.addEventListener('click', editItem);
 
       document.querySelector(UISelectors.updateBtn).addEventListener('click', updateItem);
 
@@ -261,20 +266,20 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
          // Add item
          const newItem = itemControl.addItem(input.name, input.calories);
 
-         // Add item to UI list
-         UIControl.addListItem(newItem);
-
-         // Get total calories and update
-         const totalCalories = itemControl.getTotalCalories();
-
-         // Display calories
-         UIControl.displayCalories(totalCalories);
-
          // Update main user data structure
          mainDataControl.updateUserMeals(newItem);
 
          // Update calories data structure
-         mainDataControl.updateUserCalories();
+         mainDataControl.updateUserCalories(newItem);
+
+         // Get total calories and update
+         const totalCalories = mainDataControl.getCaloriesGained();
+
+         // Display calories
+         UIControl.displayCalories(totalCalories);
+
+         // Add item to UI list
+         UIControl.addListItem(newItem);
 
          // Clear fields
          UIControl.clearInput();
@@ -293,6 +298,8 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
          // Get item
          const itemToEdit = itemControl.getItemById(id);
 
+         console.log('Item to edit:', itemToEdit);
+
          // Set current item
          itemControl.setCurrentItem(itemToEdit);
 
@@ -310,13 +317,13 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
       // Add updated item class
       const updatedItem = itemControl.updateItem(input.name, input.calories);
 
+      console.log(updatedItem);
+
+      // Update main user data structure
+      mainDataControl.updateMeal(updatedItem);
+
       // Update item in UI
       UIControl.updateItem(updatedItem);
-
-      // Update calories
-      const updatedCalories = itemControl.getTotalCalories();
-
-      UIControl.displayCalories(updatedCalories);
 
       // Clear input fields
       UIControl.clearInput();
@@ -381,7 +388,7 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
          UIControl.populateItemList(items);
 
          // Get total calories and update
-         const totalCalories = itemControl.getTotalCalories();
+         const totalCalories = mainDataControl.getCaloriesGained();
 
          // Display calories
          UIControl.displayCalories(totalCalories);
