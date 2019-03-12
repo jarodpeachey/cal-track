@@ -82,12 +82,12 @@ const sessionControl = (function () {
    }
 
    return {
-      startNewSession: function () {
-         // Get current user
-         let currentUser = mainDataControl.getCurrentUser();
-
+      startNewSession: function (user) {
          // Display user dashboard
-         sessionUIControl.displayDashboard(currentUser);
+         sessionUIControl.displayDashboard(user);
+
+         // Set current user
+         mainDataControl.setCurrentUser(user);
 
          // Load event listeners
          loadEventListeners();

@@ -1,7 +1,7 @@
 // Item Controller
-const itemControl = (function () {
+const mealItemControl = (function () {
    // Item Constructor
-   const Item = function (id, name, calories) {
+   const Meal = function (id, name, calories) {
       this.id = id;
       this.name = name;
       this.calories = calories;
@@ -9,8 +9,7 @@ const itemControl = (function () {
 
    // Data Structure / State
    const data = {
-      currentItem: null,
-      totalCalories: 0
+      currentItem: null
    }
 
    // Public methods
@@ -34,7 +33,7 @@ const itemControl = (function () {
          calories = parseInt(calories);
 
          // Create new item
-         newItem = new Item(ID, name, calories);
+         newItem = new Meal(ID, name, calories);
 
          return newItem;
       },
@@ -67,15 +66,13 @@ const itemControl = (function () {
          return found;
       },
       deleteItem: function (id) {
-         // const ids = data.items.map(function(item) {
-         //    return item.id;
-         // });
          let itemToDelete = '';
 
-         data.items.forEach(function (item, index) {
+         let items = mainDataControl.getCurrentUser().meals;
+
+         items.forEach(function (item, index) {
             if (item.id == id) {
-               itemToDelete = data.items[index];
-               data.items.splice(index, 1);
+               itemToDelete = items[index];
             }
          })
 
@@ -94,15 +91,6 @@ const itemControl = (function () {
       },
       getCurrentItem: function () {
          return data.currentItem;
-      },
-      getTotalCalories: () => {
-         let total = 0;
-         data.items.forEach((item) => {
-            total += item.calories;
-         });
-
-         data.totalCalories = total;
-         return data.totalCalories;
       }
    }
 })();
@@ -110,7 +98,7 @@ const itemControl = (function () {
 
 
 // UI Controller
-const UIControl = (function () {
+const mealUIControl = (function () {
    const UISelectors = {
       itemList: '#item-list',
       addBtn: '.add-btn',
@@ -170,7 +158,7 @@ const UIControl = (function () {
       addCurrentItemToForm: function (item) {
          document.querySelector(UISelectors.itemNameInput).value = item.name;
          document.querySelector(UISelectors.itemCaloriesInput).value = item.calories;
-         UIControl.showEditState();
+         mealUIControl.showEditState();
       },
       updateItem: function (item) {
          const oldItem = document.querySelector(`#item-${item.id}`);
@@ -201,14 +189,12 @@ const UIControl = (function () {
          }
 
          // Clear edit state
-         UIControl.clearEditState();
+         mealUIControl.clearEditState();
       },
-      deleteAllItems: function () {
-         const UIlist = document.querySelector(UISelectors.itemList);
+      deleteAllItems: function() {
+         const list = document.querySelector(UISelectors.itemList);
 
-         for (i = 0; i < UIlist.children.length; i++) {
-            UIlist.children[i].remove();
-         }
+         list.innerHTML = '';
       },
       getSelectors: function () {
          return UISelectors;
@@ -217,7 +203,7 @@ const UIControl = (function () {
          document.querySelector(UISelectors.caloriesOutput).innerHTML = totalCalories;
       },
       clearEditState: function () {
-         UIControl.clearInput();
+         mealUIControl.clearInput();
          document.querySelector(UISelectors.updateBtn).style.display = 'none';
          document.querySelector(UISelectors.deleteBtn).style.display = 'none';
          document.querySelector(UISelectors.backBtn).style.display = 'none';
@@ -235,11 +221,18 @@ const UIControl = (function () {
 
 
 // App Controller
-const appControl = (function (itemControl, UIControl, mainDataControl) {
+const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
    // Load event listeners
    const loadEventListeners = function () {
+      document.addEventListener('keypress', function (e) {
+         if (e.keycode === 13 || e.which === 13) {
+            e.preventDefault();
+            return false;
+         }
+      });
+
       // Get UI selectors
-      const UISelectors = UIControl.getSelectors();
+      const UISelectors = mealUIControl.getSelectors();
 
       // Add item event
       document.querySelector(UISelectors.addBtn).addEventListener('click', addItem);
@@ -259,30 +252,30 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
    // Add item submit
    const addItem = function (e) {
       // Get form input from UI Controller
-      const input = UIControl.getItemInput();
+      const input = mealUIControl.getItemInput();
 
       // Check for name and calorie input
       if (input.name !== '' && input.calories !== '') {
          // Add item
-         const newItem = itemControl.addItem(input.name, input.calories);
+         const newItem = mealItemControl.addItem(input.name, input.calories);
 
          // Update main user data structure
          mainDataControl.updateUserMeals(newItem);
 
          // Update calories data structure
-         mainDataControl.updateUserCalories(newItem);
+         mainDataControl.updateUserCalories();
 
          // Get total calories and update
          const totalCalories = mainDataControl.getCaloriesGained();
 
          // Display calories
-         UIControl.displayCalories(totalCalories);
+         mealUIControl.displayCalories(totalCalories);
 
          // Add item to UI list
-         UIControl.addListItem(newItem);
+         mealUIControl.addListItem(newItem);
 
          // Clear fields
-         UIControl.clearInput();
+         mealUIControl.clearInput();
       }
 
       e.preventDefault();
@@ -296,15 +289,15 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
          const id = parseInt(listIDArray[1]);
 
          // Get item
-         const itemToEdit = itemControl.getItemById(id);
+         const itemToEdit = mealItemControl.getItemById(id);
 
          console.log('Item to edit:', itemToEdit);
 
          // Set current item
-         itemControl.setCurrentItem(itemToEdit);
+         mealItemControl.setCurrentItem(itemToEdit);
 
          // Add item to form
-         UIControl.addCurrentItemToForm(itemControl.getCurrentItem());
+         mealUIControl.addCurrentItemToForm(mealItemControl.getCurrentItem());
       }
       e.preventDefault();
    }
@@ -312,24 +305,31 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
    // Update function
    const updateItem = function (e) {
       // Get the new inputs
-      const input = UIControl.getItemInput();
+      const input = mealUIControl.getItemInput();
 
       // Add updated item class
-      const updatedItem = itemControl.updateItem(input.name, input.calories);
-
-      console.log(updatedItem);
+      const updatedItem = mealItemControl.updateItem(input.name, input.calories);
 
       // Update main user data structure
       mainDataControl.updateMeal(updatedItem);
 
+      // Update calories data structure
+      mainDataControl.updateUserCalories();
+
+      // Get total calories and update
+      const totalCalories = mainDataControl.getCaloriesGained();
+
+      // Display calories
+      mealUIControl.displayCalories(totalCalories);
+
       // Update item in UI
-      UIControl.updateItem(updatedItem);
+      mealUIControl.updateItem(updatedItem);
 
       // Clear input fields
-      UIControl.clearInput();
+      mealUIControl.clearInput();
 
       // Clear edit state buttons
-      UIControl.clearEditState();
+      mealUIControl.clearEditState();
 
       e.preventDefault();
    }
@@ -339,38 +339,51 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
       e.preventDefault();
 
       // Clear edit state
-      UIControl.clearEditState();
+      mealUIControl.clearEditState();
    }
 
    const deleteItem = function (e) {
       // Get current item
-      const currentItem = itemControl.getCurrentItem();
+      const currentItem = mealItemControl.getCurrentItem();
 
       // Delete from data structure
-      const itemToDelete = itemControl.deleteItem(currentItem.id);
+      const itemToDelete = mealItemControl.deleteItem(currentItem.id);
+
+      console.log(itemToDelete);
+
+      // Delete from data structure
+      mainDataControl.deleteMeal(itemToDelete);
 
       // Delete from UI
-      UIControl.deleteItem(itemToDelete);
+      mealUIControl.deleteItem(itemToDelete);
 
-      // Update calories
-      const updatedCalories = itemControl.getTotalCalories();
+      // Update calories data structure
+      mainDataControl.updateUserCalories();
 
-      UIControl.displayCalories(updatedCalories);
+      // Get total calories and update
+      const totalCalories = mainDataControl.getCaloriesGained();
+
+      // Display calories
+      mealUIControl.displayCalories(totalCalories);
 
       e.preventDefault();
    }
 
    const clearAllItems = function (e) {
       // Delete from data
-      itemControl.deleteAllItems();
+      mainDataControl.deleteAllMeals();
 
-      // Delete from UI
-      UIControl.deleteAllItems();
+      // UI Control delete
+      mealUIControl.deleteAllItems();
 
-      // Update calories
-      const updatedCalories = itemControl.getTotalCalories();
+      // Update calories data structure
+      mainDataControl.updateUserCalories();
 
-      UIControl.displayCalories(updatedCalories);
+      // Get total calories and update
+      const totalCalories = mainDataControl.getCaloriesGained();
+
+      // Display calories
+      mealUIControl.displayCalories(totalCalories);
 
       e.preventDefault();
    }
@@ -379,26 +392,26 @@ const appControl = (function (itemControl, UIControl, mainDataControl) {
    return {
       init: function () {
          // Clear edit state
-         UIControl.clearEditState();
+         mealUIControl.clearEditState();
 
          // Fetch items from data structure
-         const items = itemControl.getItems();
+         const items = mealItemControl.getItems();
 
          // Populate list with items
-         UIControl.populateItemList(items);
+         mealUIControl.populateItemList(items);
 
          // Get total calories and update
          const totalCalories = mainDataControl.getCaloriesGained();
 
          // Display calories
-         UIControl.displayCalories(totalCalories);
+         mealUIControl.displayCalories(totalCalories);
 
          // Load event listeners
          loadEventListeners();
       }
    }
 
-})(itemControl, UIControl, mainDataControl);
+})(mealItemControl, mealUIControl, mainDataControl);
 
 // Initialize App
 appControl.init();

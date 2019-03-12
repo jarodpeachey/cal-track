@@ -116,6 +116,36 @@ const mainDataControl = (function () {
 
          localStorage.setItem('users', JSON.stringify(usersArray));
          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      },
+      deleteMeal: function(mealToDelete){
+         let currentUser = mainDataControl.getCurrentUser();
+         let usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            user.meals.forEach(function(meal, index) {
+               if (meal.id == mealToDelete.id) {
+                  user.meals.splice(index, 1);
+                  currentUser.meals.splice(index, 1);
+               }
+            })
+         })
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      },
+      deleteAllMeals: function () {
+         let currentUser = mainDataControl.getCurrentUser();
+         let usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            if (user.id == currentUser.id) {
+               user.meals = [];
+               currentUser.meals = [];
+            }
+         })
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
       }
    }
 })()
