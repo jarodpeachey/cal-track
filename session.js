@@ -8,23 +8,20 @@ const sessionUIControl = (function () {
          let workouts = ``;
 
          user.meals.forEach(function (meal) {
-            for (i = 0; i < user.meals.length; i++) {
-               meals += `
+            meals += `
                <li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>
                `
-            }
          })
 
          user.workouts.forEach(function (workout) {
-            for (i = 0; i < user.workouts.length; i++) {
-               workouts += `
+            workouts += `
                <li class="collection-item"><strong>${workout.name}</strong> <em class="right">${workout.calories} calories gained</em></li>
                `
-            }
          })
 
-         container.innerHTML = `
-         <div class="row bg-primary">
+         if (user.workouts == '' && user.meals == '') {
+            container.innerHTML = `
+            <div class="row bg-primary">
          <div class="col col-12">
             <div class="center-text p-4">
                <h2 class="m-0">Welcome, ${user.name}! Get started by adding a meal or a workout.</h2>
@@ -35,7 +32,47 @@ const sessionUIControl = (function () {
       </div>
       <div class="row">
          <div class="col mobile-col-12">
-            <div class="center-text dashboard-item">
+            <div class="center-text dashboard-item my-2">
+               <h3 class="mb-0">${user.netCalories} Net Calorie Gain</h3>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col">
+            <div class="dashboard-item center-text">
+               <h5>${user.caloriesGained} calories gained</h5>
+               <small>
+                  <ul class="collection rounded align-text-left">
+                  ${meals}
+                  </ul>
+                  <button class="small accent">See more meals</button>
+               </small>
+            </div>
+         </div>
+         <div class="col">
+            <div class="dashboard-item center-text">
+               <h5>${user.caloriesLost} calories lost</h5>
+               <small>
+               <ul class="collection rounded align-text-left">
+               ${workouts}
+               </ul>
+                  <button class="small accent">See more workouts</button>
+               </small>
+            </div>
+         </div>
+      </div>
+            `
+         } else {
+            container.innerHTML = `
+         <div class="row bg-primary center-text mb-3">
+            <div class="col mobile-col-12">
+               <h2 class="px-2 m-0">Welcome back!</h2>
+               <p class="subtitle mb-2">It's time to get to work!  Here are your meal and workout stats.</p>
+            </div>
+         </div>
+      <div class="row">
+         <div class="col mobile-col-12">
+            <div class="center-text dashboard-item mb-2">
                <h3 class="mb-0">${user.netCalories} Net Calorie Gain</h3>
             </div>
          </div>
@@ -65,6 +102,7 @@ const sessionUIControl = (function () {
          </div>
       </div>
          `
+         }
       }
    }
 })()
