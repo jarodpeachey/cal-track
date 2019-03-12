@@ -7,19 +7,14 @@ const loginControl = (function () {
       let username = document.getElementById('loginUsername').value;
       let password = document.getElementById('loginPassword').value;
 
-      console.log(username);
       const users = storageControl.getUsers();
 
       users.forEach(function (user) {
          if (user.username == username && user.password == password) {
+            console.log('User started');
+
             // Set current user
             mainDataControl.setCurrentUser(user);
-
-            // Get current user
-            const currentUser = mainDataControl.getCurrentUser();
-
-            // Display user dashboard
-            sessionUIControl.displayDashboard(user);
 
             sessionControl.startNewSession();
          } else {
