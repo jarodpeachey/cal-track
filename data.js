@@ -54,6 +54,20 @@ const mainDataControl = (function () {
          localStorage.setItem('users', JSON.stringify(usersArray));
          localStorage.setItem('currentUser', JSON.stringify(currentUser));
       },
+      updateUserWorkouts: function (newWorkout) {
+         let currentUser = mainDataControl.getCurrentUser();
+         const usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            if (user.name == currentUser.name) {
+               user.workouts.push(newWorkout);
+               currentUser.workouts.push(newWorkout);
+            }
+         });
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      },
       updateUserCalories: function() {
          const meals = mainDataControl.getCurrentUser().meals;
          const workouts = mainDataControl.getCurrentUser().workouts;
@@ -66,7 +80,7 @@ const mainDataControl = (function () {
          })
 
          workouts.forEach(function(workout) {
-            caloriesGained += workout.calories;
+            caloriesLost += workout.calories;
          })
 
          let netCalories = caloriesGained - caloriesLost;
@@ -95,6 +109,13 @@ const mainDataControl = (function () {
          const currentUser = mainDataControl.getCurrentUser();
 
          const calories = currentUser.caloriesGained;
+
+         return calories;
+      },
+      getCaloriesLost: function(){
+         const currentUser = mainDataControl.getCurrentUser();
+
+         const calories = currentUser.caloriesLost;
 
          return calories;
       },
@@ -134,6 +155,55 @@ const mainDataControl = (function () {
          localStorage.setItem('currentUser', JSON.stringify(currentUser));
       },
       deleteAllMeals: function () {
+         let currentUser = mainDataControl.getCurrentUser();
+         let usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            if (user.id == currentUser.id) {
+               user.meals = [];
+               currentUser.meals = [];
+            }
+         })
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      },
+      updateWorkout: function (updatedWorkout) {
+         let currentUser = mainDataControl.getCurrentUser();
+         let usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            user.workouts.forEach(function(workout, index) {
+               if (workout.id == updatedWorkout.id) {
+                  user.workouts[index].name = updatedWorkout.name;
+                  user.workouts[index].calories = updatedWorkout.calories;
+
+                  currentUser.workouts[index].name = updatedWorkout.name;
+                  currentUser.workouts[index].calories = updatedWorkout.calories;
+               }
+            })
+         })
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      },
+      deleteWorkout: function(workoutToDelete){
+         let currentUser = mainDataControl.getCurrentUser();
+         let usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            user.workouts.forEach(function(workout, index) {
+               if (workout.id == workoutToDelete.id) {
+                  user.workouts.splice(index, 1);
+                  currentUser.workouts.splice(index, 1);
+               }
+            })
+         })
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      },
+      deleteAllWorkouts: function () {
          let currentUser = mainDataControl.getCurrentUser();
          let usersArray = storageControl.getUsers();
 

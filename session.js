@@ -1,7 +1,8 @@
 const sessionUIControl = (function () {
    return {
-      displayDashboard: function (user) {
+      displayDashboard: function () {
          let container = document.getElementById('container');
+         let user = mainDataControl.getCurrentUser();
 
          let meals = ``;
          let workouts = ``;
@@ -71,6 +72,7 @@ const sessionUIControl = (function () {
 const sessionControl = (function () {
    const loadEventListeners = function () {
       document.addEventListener('click', displayMealPage);
+      document.addEventListener('click', displayWorkoutPage);
    }
 
    const displayMealPage = function (e) {
@@ -81,10 +83,18 @@ const sessionControl = (function () {
       }
    }
 
+   const displayWorkoutPage = function (e) {
+      e.preventDefault();
+
+      if (e.target.classList.contains('addWorkout')) {
+         window.location.href = 'workouts.html';
+      }
+   }
+
    return {
       startNewSession: function (user) {
          // Display user dashboard
-         sessionUIControl.displayDashboard(user);
+         sessionUIControl.displayDashboard();
 
          // Set current user
          mainDataControl.setCurrentUser(user);
