@@ -38,7 +38,7 @@ const mainDataControl = (function () {
          storageControl.setCurrentUser(user);
       },
       getCurrentUser: function() {
-         return JSON.parse(localStorage.getItem('currentUser'));;
+         return JSON.parse(localStorage.getItem('currentUser'));
       },
       updateUserMeals: function (newMeal) {
          let currentUser = mainDataControl.getCurrentUser();
@@ -52,7 +52,7 @@ const mainDataControl = (function () {
          });
 
          localStorage.setItem('users', JSON.stringify(usersArray));
-         localStorage.setItem('currentUser', JSON.stringify(currentUser))
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
       },
       updateUserCalories: function() {
          const meals = mainDataControl.getCurrentUser().meals;
@@ -90,6 +90,32 @@ const mainDataControl = (function () {
          localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
          console.log(JSON.parse(localStorage.getItem('currentUser')));
+      },
+      getCaloriesGained: function () {
+         const currentUser = mainDataControl.getCurrentUser();
+
+         const calories = currentUser.caloriesGained;
+
+         return calories;
+      },
+      updateMeal: function (updatedMeal) {
+         let currentUser = mainDataControl.getCurrentUser();
+         let usersArray = storageControl.getUsers();
+
+         usersArray.forEach(function(user) {
+            user.meals.forEach(function(meal, index) {
+               if (meal.id == updatedMeal.id) {
+                  user.meals[index].name = updatedMeal.name;
+                  user.meals[index].calories = updatedMeal.calories;
+
+                  currentUser.meals[index].name = updatedMeal.name;
+                  currentUser.meals[index].calories = updatedMeal.calories;
+               }
+            })
+         })
+
+         localStorage.setItem('users', JSON.stringify(usersArray));
+         localStorage.setItem('currentUser', JSON.stringify(currentUser));
       }
    }
 })()
