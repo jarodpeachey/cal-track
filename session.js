@@ -1,15 +1,13 @@
 const sessionUIControl = (function () {
    return {
       displayDashboard: function (user) {
-         console.log(user);
-
          let container = document.getElementById('container');
 
          let meals = ``;
          let workouts = ``;
 
          user.meals.forEach(function (meal) {
-            for (i = 0; i < user.meals.length && i < 3; i++) {
+            for (i = 0; i < user.meals.length; i++) {
                meals += `
                <li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>
                `
@@ -17,7 +15,7 @@ const sessionUIControl = (function () {
          })
 
          user.workouts.forEach(function (workout) {
-            for (i = 0; i < user.workouts.length && i < 3; i++) {
+            for (i = 0; i < user.workouts.length; i++) {
                workouts += `
                <li class="collection-item"><strong>${workout.name}</strong> <em class="right">${workout.calories} calories gained</em></li>
                `
@@ -85,6 +83,12 @@ const sessionControl = (function () {
 
    return {
       startNewSession: function () {
+         // Get current user
+         let currentUser = mainDataControl.getCurrentUser();
+
+         // Display user dashboard
+         sessionUIControl.displayDashboard(currentUser);
+
          // Load event listeners
          loadEventListeners();
       }
