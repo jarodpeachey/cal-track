@@ -68,6 +68,8 @@ const sessionUIControl = (function () {
             <div class="col mobile-col-12">
                <h2 class="px-2 m-0">Welcome back!</h2>
                <p class="subtitle mb-2">It's time to get to work!  Here are your meal and workout stats.</p>
+               <button class="accent mt-2 addMeal">Add Meal</button>
+               <button class="accent addWorkout">Add Workout</button>
             </div>
          </div>
       <div class="row">
@@ -131,11 +133,11 @@ const sessionControl = (function () {
 
    return {
       startNewSession: function (user) {
-         // Display user dashboard
-         sessionUIControl.displayDashboard();
-
          // Set current user
          mainDataControl.setCurrentUser(user);
+
+         // Display user dashboard
+         sessionUIControl.displayDashboard();
 
          // Load event listeners
          loadEventListeners();

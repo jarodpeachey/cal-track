@@ -7,7 +7,6 @@ const loginControl = (function () {
       let username = document.getElementById('loginUsername').value;
       let password = document.getElementById('loginPassword').value;
 
-      let currentUser;
       const users = storageControl.getUsers();
 
       users.forEach(function (user) {
