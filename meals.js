@@ -386,20 +386,22 @@ const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
    }
 
    const clearAllItems = function (e) {
-      // Delete from data
-      mainDataControl.deleteAllMeals();
+      if (confirm('Are you sure you want to delete all items?')) {
+         // Delete from data
+         mainDataControl.deleteAllMeals();
 
-      // UI Control delete
-      mealUIControl.deleteAllItems();
+         // UI Control delete
+         mealUIControl.deleteAllItems();
 
-      // Update calories data structure
-      mainDataControl.updateUserCalories();
+         // Update calories data structure
+         mainDataControl.updateUserCalories();
 
-      // Get total calories and update
-      const totalCalories = mainDataControl.getCaloriesGained();
+         // Get total calories and update
+         const totalCalories = mainDataControl.getCaloriesGained();
 
-      // Display calories
-      mealUIControl.displayCalories(totalCalories);
+         // Display calories
+         mealUIControl.displayCalories(totalCalories);
+      }
 
       e.preventDefault();
    }
