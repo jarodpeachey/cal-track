@@ -247,6 +247,21 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
       document.querySelector(UISelectors.deleteBtn).addEventListener('click', deleteItem);
 
       document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItems);
+
+      document.querySelector('.workouts').addEventListener('click', function (e) {
+         window.location.href = 'workouts.html';
+         e.preventDefault();
+      })
+
+      document.querySelector('.meals').addEventListener('click', function (e) {
+         window.location.href = 'meals.html';
+         e.preventDefault();
+      })
+
+      document.querySelector('.dashboard').addEventListener('click', function (e) {
+         window.location.href = 'dashboard.html';
+         e.preventDefault();
+      })
    }
 
    // Add item submit
