@@ -12,15 +12,17 @@
 </head>
 
 <body>
-   <nav class="bg-primary">
-      <div class="pl-2">
-         <div class="row mobile v-align-center">
-            <div class="col">
-               <h2 class="m-0">CalTrack</h2>
-            </div>
-            <div class="col col-8">
-               <button class="primary mt-1 float-right clear-btn">Clear All</button>
-            </div>
+   <nav class="navbar white" style="border-bottom: 2px solid #00c6e0;">
+      <div class="navbar-content">
+         <div class="navbar-left center-text tablet-text-align-left">
+            <h1>CalTrack</h1>
+         </div>
+         <div class="navbar-right">
+            <ul class="menu">
+               <li class="menu-item mr-2 addWorkout"><a href="workouts.html"><i class="fas fa-running fa-2x"></i></a></li>
+               <li class="menu-item mr-2 addMeal"><a href="meals.html"><i class="fas fa-hamburger fa-2x"></i></a></li>
+               <li class="menu-item dashboard"><a href="session.html"><i class="fas fa-th-large fa-2x"></i></a></li>
+            </ul>
          </div>
       </div>
    </nav>
@@ -59,10 +61,10 @@
          <ul id="item-list" class="collection" style="max-width: 800px; margin: 0 auto;">
 
          </ul>
+         <div class="button clear-btn danger float-right mr-0">Clear all</div>
       </div>
    </section>
    <script src="data.js"></script>
-   <script src="session.js"></script>
    <script src="meals.js"></script>
 </body>
 
