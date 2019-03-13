@@ -132,15 +132,16 @@ const sessionControl = (function () {
    }
 
    return {
-      startNewSession: function (user) {
-         // Set current user
-         mainDataControl.setCurrentUser(user);
+      startNewSession: function () {
+         const currentUser = mainDataControl.getCurrentUser();
 
          // Display user dashboard
-         sessionUIControl.displayDashboard();
+         sessionUIControl.displayDashboard(currentUser);
 
          // Load event listeners
          loadEventListeners();
       }
    }
 })()
+
+sessionControl.startNewSession();

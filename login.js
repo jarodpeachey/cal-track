@@ -11,7 +11,8 @@ const loginControl = (function () {
 
       users.forEach(function (user) {
          if (user.username === username && user.password === password) {
-            sessionControl.startNewSession(user);
+            mainDataControl.setCurrentUser(user);
+            window.location.href = 'session.html';
          } else {
             alert('The username/password is incorrect. Please try again.');
          }
