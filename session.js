@@ -1,108 +1,119 @@
 const sessionUIControl = (function () {
    return {
-      displayDashboard: function () {
+      displayDashboard: function (user) {
          let container = document.getElementById('container');
-         let user = mainDataControl.getCurrentUser();
+         let lostGained = '';
+         let totalCalories = Math.abs(user.netCalories);
+         let mealButton = `<button class="accent addMeal m-0">See more workouts</button>`;
+         let workoutButton = `<button class="accent addWorkout m-0">See more workouts</button>`;
 
-         let meals = ``;
-         let workouts = ``;
+         if (user.caloriesGained == 0) {
+            mealButton = `You don't have any meals yet. <br><br><button class="accent addMeal m-0">Add a meal</button>`;
+         }
+
+         if (user.caloriesLost == 0) {
+            workoutButton = `You don't have any workouts yet. <br><br><button class="accent addMeal m-0">Add a workout</button>`;
+         }
+
+         if (user.netCalories <= 0) {
+            lostGained = 'Lost';
+         } else if (user.netCalories > 0) {
+            lostGained = 'Gained';
+         }
+
+         let meals = [];
+         let workouts = [];
 
          user.meals.forEach(function (meal) {
-            meals += `
+            meals.push(`
                <li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>
-               `
+               `); 
          })
 
-         user.workouts.forEach(function (workout) {
-            workouts += `
-               <li class="collection-item"><strong>${workout.name}</strong> <em class="right">${workout.calories} calories gained</em></li>
-               `
+         if (meals.length > 3) {
+            meals.splice(3);
+         }
+
+         user.workouts.forEach(function (meal) {
+            workouts.push(`
+               <li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>
+               `); 
          })
+
+         if (workouts.length > 3) {
+            workouts.splice(3);
+         }
 
          if (user.workouts == '' && user.meals == '') {
             container.innerHTML = `
-            <div class="row bg-primary">
-         <div class="col col-12">
-            <div class="center-text p-4">
-               <h2 class="m-0">Welcome, ${user.name}! Get started by adding a meal or a workout.</h2>
-               <button class="accent mt-2 addMeal">Add Meal</button>
-               <button class="accent addWorkout">Add Workout</button>
+            <div class="m-auto center-text">
+            <h1 class="title">Welcome, ${user.name}!</h1>
+            <h3 class="subtitle">You're new here.  Start your exercise journey by adding a meal or a workout.</h3>
+            <button class="accent addMeal">Add Meal</button>
+            <button class="accent addWorkout m-0">Add Workout</button>
+         </div>
+         <div class="row">
+            <div class="col mobile-col-12 center-text">
+               <div class="dashboard-item">
+                  <h2 class="m-0">Total Calories ${lostGained}: ${totalCalories}</h2>
+               </div>
             </div>
          </div>
-      </div>
-      <div class="row">
-         <div class="col mobile-col-12">
-            <div class="center-text dashboard-item my-2">
-               <h3 class="mb-0">${user.netCalories} Net Calorie Gain</h3>
-            </div>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col">
-            <div class="dashboard-item center-text">
-               <h5>${user.caloriesGained} calories gained</h5>
-               <small>
-                  <ul class="collection rounded align-text-left">
-                  ${meals}
+         <div class="row">
+            <div class="col">
+               <div class="dashboard-item center-text">
+                  <h4>Calories Gained: ${user.caloriesGained}</h4>
+                  <ul class="collection align-text-left">
+                     ${meals}
                   </ul>
-                  <button class="small accent">See more meals</button>
-               </small>
+                  <button class="accent addMeal m-0">See more meals</button>
+               </div>
+            </div>
+            <div class="col">
+               <div class="dashboard-item center-text">
+                  <h4>Calories Lost: ${user.caloriesLost}</h4>
+                  <ul class="collection align-text-left">
+                     ${workouts}
+                  </ul>
+                  <button class="accent addMeal m-0">See more workouts</button>
+               </div>
             </div>
          </div>
-         <div class="col">
-            <div class="dashboard-item center-text">
-               <h5>${user.caloriesLost} calories lost</h5>
-               <small>
-               <ul class="collection rounded align-text-left">
-               ${workouts}
-               </ul>
-                  <button class="small accent">See more workouts</button>
-               </small>
-            </div>
-         </div>
-      </div>
             `
          } else {
             container.innerHTML = `
-         <div class="row bg-primary center-text mb-3">
-            <div class="col mobile-col-12">
-               <h2 class="px-2 m-0">Welcome back!</h2>
-               <p class="subtitle mb-2">It's time to get to work!  Here are your meal and workout stats.</p>
-               <button class="accent mt-2 addMeal">Add Meal</button>
-               <button class="accent addWorkout">Add Workout</button>
+            <div class="m-auto center-text">
+            <h1 class="title">Welcome back, ${user.name}!</h1>
+            <h3 class="subtitle">Here's a summary of your calorie activity.</h3>
+         </div>
+         <div class="row">
+            <div class="col mobile-col-12 center-text">
+               <div class="dashboard-item">
+                  <h2 class="m-0">Total Calories ${lostGained}: ${totalCalories}</h2>
+               </div>
             </div>
          </div>
-      <div class="row">
-         <div class="col mobile-col-12">
-            <div class="center-text dashboard-item mb-2">
-               <h3 class="mb-0">${user.netCalories} Net Calorie Gain</h3>
-            </div>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col">
-            <div class="dashboard-item center-text">
-               <h5>${user.caloriesGained} calories gained</h5>
-               <small>
-                  <ul class="collection rounded align-text-left">
-                  ${meals}
+         <div class="row">
+            <div class="col">
+               <div class="dashboard-item center-text">
+                  <h4>Calories Gained: ${user.caloriesGained}</h4>
+                  <ul class="collection align-text-left">
+                     ${meals}
                   </ul>
-                  <button class="small accent">See more meals</button>
-               </small>
+                  ${mealButton}
+
+               </div>
+            </div>
+            <div class="col">
+               <div class="dashboard-item center-text">
+                  <h4>Calories Lost: ${user.caloriesLost}</h4>
+                  <ul class="collection align-text-left">
+                     ${workouts}
+                  </ul>
+                  ${workoutButton}
+               </div>
             </div>
          </div>
-         <div class="col">
-            <div class="dashboard-item center-text">
-               <h5>${user.caloriesLost} calories lost</h5>
-               <small>
-               <ul class="collection rounded align-text-left">
-               ${workouts}
-               </ul>
-                  <button class="small accent">See more workouts</button>
-               </small>
-            </div>
-         </div>
-      </div>
          `
          }
       }
@@ -110,33 +121,13 @@ const sessionUIControl = (function () {
 })()
 
 const sessionControl = (function () {
-   const loadEventListeners = function () {
-      document.addEventListener('click', displayMealPage);
-      document.addEventListener('click', displayWorkoutPage);
-   }
-
-   const displayMealPage = function (e) {
-      e.preventDefault();
-
-      if (e.target.classList.contains('addMeal')) {
-         window.location.href = 'meals.html';
-      }
-   }
-
-   const displayWorkoutPage = function (e) {
-      e.preventDefault();
-
-      if (e.target.classList.contains('addWorkout')) {
-         window.location.href = 'workouts.html';
-      }
-   }
-
    return {
       startNewSession: function () {
-         const currentUser = mainDataControl.getCurrentUser();
+         // Get current user
+         const user = mainDataControl.getCurrentUser();
 
          // Display user dashboard
-         // sessionUIControl.displayDashboard(currentUser);
+         sessionUIControl.displayDashboard(user);
 
          // Load event listeners
          loadEventListeners();
