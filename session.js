@@ -136,7 +136,7 @@ const sessionControl = (function () {
          const currentUser = mainDataControl.getCurrentUser();
 
          // Display user dashboard
-         sessionUIControl.displayDashboard(currentUser);
+         // sessionUIControl.displayDashboard(currentUser);
 
          // Load event listeners
          loadEventListeners();
