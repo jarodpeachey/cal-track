@@ -21,28 +21,26 @@ const sessionUIControl = (function () {
             lostGained = 'Gained';
          }
 
-         let meals = [];
-         let workouts = [];
-
-         user.meals.forEach(function (meal) {
-            meals.push(`
-               <li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>
-               `); 
-         })
+         let meals = user.meals;
+         let workouts = user.workouts;
+         let displayMeals = '';
+         let displayWorkouts = '';
 
          if (meals.length > 3) {
-            meals.splice(3);
+            meals.splice(2, 1);
          }
-
-         user.workouts.forEach(function (meal) {
-            workouts.push(`
-               <li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>
-               `); 
-         })
 
          if (workouts.length > 3) {
-            workouts.splice(3);
+            workouts.splice(2);
          }
+
+         meals.forEach(function(meal) {
+            displayMeals += `<li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>`
+         })
+
+         workouts.forEach(function(workout) {
+            displayWorkouts += `<li class="collection-item"><strong>${workout.name}</strong> <em class="right">${workout.calories} calories gained</em></li>`
+         })
 
          if (user.workouts == '' && user.meals == '') {
             container.innerHTML = `
@@ -61,19 +59,19 @@ const sessionUIControl = (function () {
          </div>
          <div class="row">
             <div class="col">
-               <div class="dashboard-item center-text">
+               <div class="dashboard-item center-text full-height">
                   <h4>Calories Gained: ${user.caloriesGained}</h4>
                   <ul class="collection align-text-left">
-                     ${meals}
+                     ${displayMeals}
                   </ul>
                   <button class="accent addMeal m-0">See more meals</button>
                </div>
             </div>
             <div class="col">
-               <div class="dashboard-item center-text">
+               <div class="dashboard-item center-text full-height">
                   <h4>Calories Lost: ${user.caloriesLost}</h4>
                   <ul class="collection align-text-left">
-                     ${workouts}
+                     ${displayWorkouts}
                   </ul>
                   <button class="accent addMeal m-0">See more workouts</button>
                </div>
@@ -95,20 +93,20 @@ const sessionUIControl = (function () {
          </div>
          <div class="row">
             <div class="col">
-               <div class="dashboard-item center-text">
+               <div class="dashboard-item center-text full-height">
                   <h4>Calories Gained: ${user.caloriesGained}</h4>
                   <ul class="collection align-text-left">
-                     ${meals}
+                     ${displayMeals}
                   </ul>
                   ${mealButton}
 
                </div>
             </div>
             <div class="col">
-               <div class="dashboard-item center-text">
+               <div class="dashboard-item center-text full-height">
                   <h4>Calories Lost: ${user.caloriesLost}</h4>
                   <ul class="collection align-text-left">
-                     ${workouts}
+                     ${displayWorkouts}
                   </ul>
                   ${workoutButton}
                </div>
@@ -128,9 +126,6 @@ const sessionControl = (function () {
 
          // Display user dashboard
          sessionUIControl.displayDashboard(user);
-
-         // Load event listeners
-         loadEventListeners();
       }
    }
 })()
