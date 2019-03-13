@@ -12,7 +12,7 @@ const loginControl = (function () {
       users.forEach(function (user) {
          if (user.username === username && user.password === password) {
             mainDataControl.setCurrentUser(user);
-            window.location.href = 'session.html';
+            window.location.href = 'dashboard.html';
          } else {
             alert('The username/password is incorrect. Please try again.');
          }
