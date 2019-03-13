@@ -13,7 +13,12 @@
       .dashboard-item {
          border-radius: 1px;
          padding: 15px;
-         border: 1px solid #d4d4d4;
+         background: #f8f8f8;
+         border: 1px solid #eeeeee;
+      }
+
+      .collection-item {
+         background: white;
       }
    </style>
 </head>
@@ -35,7 +40,39 @@
    </nav>
    <section>
       <div class="container" id="container">
-
+         <div class="m-auto center-text">
+            <h1 class="title">Welcome back, Jarod!</h1>
+            <h3 class="subtitle">Here's a summary of your calorie activity.</h3>
+         </div>
+         <div class="row">
+            <div class="col mobile-col-12 center-text">
+               <div class="dashboard-item">
+                  <h2 class="m-0">Total Calories: 570</h2>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col">
+               <div class="dashboard-item">
+                  <h4 class="center-text">Calories Gained</h4>
+                  <ul class="collection">
+                     <li class="collection-item">Item 1 <div class="right">780 Calories</div></li>
+                     <li class="collection-item">Item 2 <div class="right">175 Calories</div></li>
+                     <li class="collection-item">Item 3 <div class="right">500 Calories</div></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="col">
+               <div class="dashboard-item">
+                  <h4 class="center-text">Calories Lost</h4>
+                  <ul class="collection">
+                     <li class="collection-item">Item 1 <div class="right">500 Calories</div></li>
+                     <li class="collection-item">Item 2 <div class="right">250 Calories</div></li>
+                     <li class="collection-item">Item 3 <div class="right">80 Calories</div></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
       </div>
    </section>
 
