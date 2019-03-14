@@ -120,7 +120,7 @@ const workoutUIControl = (function () {
             html += `<li class="collection-item" id="item-${item.id}">
          <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
          <a href="#" class="right">
-           <i class="edit-item fa fa-pencil"></i>
+         <i class="edit-item fas fa-pencil-alt"></i>
          </a>
        </li>`;
          });
@@ -145,9 +145,9 @@ const workoutUIControl = (function () {
          li.id = `item-${item.id}`;
          // Add HTML
          li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} Calories</em>
-       <a href="#" class="right">
-         <i class="edit-item fa fa-pencil"></i>
-       </a>`;
+         <a href="#" class="right">
+         <i class="edit-item fas fa-pencil-alt"></i>
+         </a>`;
          // Insert item
          document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
       },
@@ -167,7 +167,7 @@ const workoutUIControl = (function () {
             `<li class="collection-item" id="item-${item.id}">
          <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
          <a href="#" class="right">
-           <i class="edit-item fa fa-pencil"></i>
+         <i class="edit-item fas fa-pencil-alt"></i>
          </a>
        </li>`;
       },

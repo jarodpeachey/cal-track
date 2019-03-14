@@ -40,6 +40,18 @@ const mainDataControl = (function () {
       getCurrentUser: function() {
          return JSON.parse(localStorage.getItem('currentUser'));
       },
+      getUserByUsername: function(username) {
+         let users = storageControl.getUsers();
+         let found = null;
+
+         users.forEach(function(user) {
+            if (user.username == username) {
+               found = user;
+            }
+         })
+
+         return found;
+      },
       updateUserMeals: function (newMeal) {
          let currentUser = mainDataControl.getCurrentUser();
          const usersArray = storageControl.getUsers();

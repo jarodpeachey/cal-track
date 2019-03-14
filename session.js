@@ -4,8 +4,8 @@ const sessionUIControl = (function () {
          let container = document.getElementById('container');
          let lostGained = '';
          let totalCalories = Math.abs(user.netCalories);
-         let mealButton = `                  <button class="accent"><a href="meals.html">Add Meal</a></button>`;
-         let workoutButton = `<button class="accent"><a href="workouts.html">Add Workout</a></button>`;
+         let mealButton = `                  <button class="accent"><a href="meals.html">See More Meals</a></button>`;
+         let workoutButton = `<button class="accent"><a href="workouts.html">See More Workouts</a></button>`;
 
          if (user.caloriesGained == 0) {
             mealButton = `You don't have any meals yet. <br><br><button class="accent"><a href="meals.html">Add Meal</a></button>`;

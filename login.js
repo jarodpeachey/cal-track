@@ -7,16 +7,28 @@ const loginControl = (function () {
       let username = document.getElementById('loginUsername').value;
       let password = document.getElementById('loginPassword').value;
 
-      const users = storageControl.getUsers();
+      const user = mainDataControl.getUserByUsername(username);
 
-      users.forEach(function (user) {
-         if (user.username === username && user.password === password) {
-            mainDataControl.setCurrentUser(user);
-            window.location.href = 'dashboard.html';
-         } else {
-            alert('The username/password is incorrect. Please try again.');
-         }
-      })
+      console.log(user);
+
+      if (user == null) {
+         alert('That username does not exist. please enter another one.');
+      } else if (user.password == password) {
+         mainDataControl.setCurrentUser(user);
+         window.location.href = 'dashboard.html';
+      } else {
+         alert('The password you entered is incorrect.');
+      }
+
+      // for (let i = 0; i < users.length; i++) {
+      //    if (users[i].username == username && users[i].password == password){
+
+      //       break;
+      //    } else {
+      //       alert('The username/password is incorrect. Please try again.');
+      //       break;
+      //    }
+      // }
 
       e.preventDefault()
    };
