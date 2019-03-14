@@ -15,7 +15,7 @@ const loginControl = (function () {
          alert('That username does not exist. please enter another one.');
       } else if (user.password == password) {
          mainDataControl.setCurrentUser(user);
-         window.location.href = 'dashboard.html';
+         window.location.href = 'dashboard.php';
       } else {
          alert('The password you entered is incorrect.');
       }

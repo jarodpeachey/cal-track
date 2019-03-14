@@ -250,17 +250,17 @@ const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
       document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItems);
 
       document.querySelector('.workouts').addEventListener('click', function (e) {
-         window.location.href = 'workouts.html';
+         window.location.href = 'workouts.php';
          e.preventDefault();
       })
 
       document.querySelector('.meals').addEventListener('click', function (e) {
-         window.location.href = 'meals.html';
+         window.location.href = 'meals.php';
          e.preventDefault();
       })
 
       document.querySelector('.dashboard').addEventListener('click', function (e) {
-         window.location.href = 'dashboard.html';
+         window.location.href = 'dashboard.php';
          e.preventDefault();
       })
    }

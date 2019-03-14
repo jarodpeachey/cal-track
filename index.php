@@ -19,8 +19,8 @@
                <h1 class="m-0">CalTrack</h1>
             </div>
             <div class="navbar-right">
-               <a href="login.html" class="button primary mr-1">Log In</a>
-               <a href="signup.html" class="button accent">Sign Up</a>
+               <a href="login.php" class="button primary mr-1">Log In</a>
+               <a href="signup.php" class="button accent">Sign Up</a>
             </div>
          </div>
       </nav>
@@ -30,7 +30,7 @@
                <i class="fas fa-running fa-5x"></i>
                <h1 class='title'>Step up your exercise game with CalTrack</h1>
                <h4 class="subtitle">CalTrack is the number one calories tracking app on the market.  See why today.</h4>
-               <a href="signup.html" class="button accent large">Get Started</a>
+               <a href="signup.php" class="button accent large">Get Started</a>
             </div>
          </div>
       </div>

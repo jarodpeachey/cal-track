@@ -4,15 +4,15 @@ const sessionUIControl = (function () {
          let container = document.getElementById('container');
          let lostGained = '';
          let totalCalories = Math.abs(user.netCalories);
-         let mealButton = `                  <button class="accent"><a href="meals.html">See More Meals</a></button>`;
-         let workoutButton = `<button class="accent"><a href="workouts.html">See More Workouts</a></button>`;
+         let mealButton = `                  <button class="accent"><a href="meals.php">See More Meals</a></button>`;
+         let workoutButton = `<button class="accent"><a href="workouts.php">See More Workouts</a></button>`;
 
          if (user.caloriesGained == 0) {
-            mealButton = `You don't have any meals yet. <br><br><button class="accent"><a href="meals.html">Add Meal</a></button>`;
+            mealButton = `You don't have any meals yet. <br><br><button class="accent"><a href="meals.php">Add Meal</a></button>`;
          }
 
          if (user.caloriesLost == 0) {
-            workoutButton = `You don't have any workouts yet. <br><br><button class="accent"><a href="workouts.html">Add Workout</a></button>`;
+            workoutButton = `You don't have any workouts yet. <br><br><button class="accent"><a href="workouts.php">Add Workout</a></button>`;
          }
 
          if (user.netCalories <= 0) {
@@ -47,8 +47,8 @@ const sessionUIControl = (function () {
             <div class="m-auto center-text">
             <h1 class="title">Welcome, ${user.name}!</h1>
             <h3 class="subtitle">You're new here.  Start your exercise journey by adding a meal or a workout.</h3>
-            <button class="accent"><a href="meals.html">Add Meal</a></button>
-            <button class="accent"><a href="workouts.html">Add Workout</a></button>
+            <button class="accent"><a href="meals.php">Add Meal</a></button>
+            <button class="accent"><a href="workouts.php">Add Workout</a></button>
          </div>
          <div class="row">
             <div class="col mobile-col-12 center-text">
@@ -64,7 +64,7 @@ const sessionUIControl = (function () {
                   <ul class="collection align-text-left">
                      ${displayMeals}
                   </ul>
-                  <button class="accent m-0"><a href="meals.html">Add Meal</a></button>
+                  <button class="accent m-0"><a href="meals.php">Add Meal</a></button>
                </div>
             </div>
             <div class="col">
@@ -73,7 +73,7 @@ const sessionUIControl = (function () {
                   <ul class="collection align-text-left">
                      ${displayWorkouts}
                   </ul>
-                  <button class="accent m-0"><a href="workouts.html">Add Workout</a></button>
+                  <button class="accent m-0"><a href="workouts.php">Add Workout</a></button>
                </div>
             </div>
          </div>

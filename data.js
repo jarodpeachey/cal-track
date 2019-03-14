@@ -11,25 +11,19 @@ const mainDataControl = (function () {
       this.netCalories = netCalories;
    }
 
-   const mainData = {
-      users: []
-   }
-
    return {
       createUser: function (name, username, password) {
+         let users = storageControl.getUsers();
          let ID;
          // Create ID
-         if (mainData.users.length > 0) {
-            ID = mainData.users[mainData.users.length - 1].id + 1;
+         if (users.length > 0) {
+            ID = users[users.length - 1].id + 1;
          } else {
             ID = 0;
          }
 
          // Create user
          let newUser = new User(ID, name, username, password, [], [], 0, 0, 0);
-
-         // Append to users array
-         mainData.users.push(newUser);
 
          // Return new user
          return newUser;
@@ -249,11 +243,13 @@ const storageControl = (function () {
       },
       getUsers: function () {
          let users = [];
-         if (JSON.parse(localStorage.getItem('users' === null))) {
-            users = [];
-         } else {
+         if (JSON.parse(localStorage.getItem('users'))) {
             users = JSON.parse(localStorage.getItem(`users`));
+         } else {
+            users = [];
          }
+
+         console.log(users);
 
          return users;
       },

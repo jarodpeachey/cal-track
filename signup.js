@@ -1,6 +1,7 @@
-const signupControl = (function (storageControl, mainDataControl) {
+const signupControl = (
+   function (storageControl, mainDataControl) {
    const loadEventListeners = function () {
-         document.getElementById('signupBtn').addEventListener('click', signUp);  
+      document.getElementById('signupBtn').addEventListener('click', signUp);
    }
 
    const signUp = function (e) {
@@ -11,25 +12,16 @@ const signupControl = (function (storageControl, mainDataControl) {
       let newUser;
 
       const users = storageControl.getUsers();
+      const user = mainDataControl.getUserByUsername(username);
 
-      if (users == null) {
+      if (user == null) {
          newUser = mainDataControl.createUser(name, username, password);
 
          storageControl.addNewUser(newUser);
 
-         window.location.href = 'login.html';
+         window.location.href = 'login.php';
       } else {
-         users.forEach(function (user) {
-            if (user.username == username) {
-               alert('Please choose a different username')
-            } else {
-               newUser = mainDataControl.createUser(name, username, password);
-
-               storageControl.addNewUser(newUser);
-
-               window.location.href = 'login.html';
-            }
-         })
+         alert('Please choose a different username');
       }
 
       e.preventDefault();
