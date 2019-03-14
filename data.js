@@ -31,7 +31,7 @@ const mainDataControl = (function () {
          // Append to users array
          mainData.users.push(newUser);
 
-         // Return newUser
+         // Return new user
          return newUser;
       },
       setCurrentUser: function(user) {
