@@ -244,17 +244,17 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
       document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItems);
 
       document.querySelector('.workouts').addEventListener('click', function (e) {
-         window.location.href = 'workouts.php';
+         window.location.href = 'workouts.html';
          e.preventDefault();
       })
 
       document.querySelector('.meals').addEventListener('click', function (e) {
-         window.location.href = 'meals.php';
+         window.location.href = 'meals.html';
          e.preventDefault();
       })
 
       document.querySelector('.dashboard').addEventListener('click', function (e) {
-         window.location.href = 'dashboard.php';
+         window.location.href = 'dashboard.html';
          e.preventDefault();
       })
    }

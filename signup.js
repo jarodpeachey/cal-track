@@ -19,7 +19,7 @@ const signupControl = (
 
          storageControl.addNewUser(newUser);
 
-         window.location.href = 'login.php';
+         window.location.href = 'login.html';
       } else {
          alert('Please choose a different username');
       }
