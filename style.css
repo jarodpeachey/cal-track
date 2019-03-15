@@ -7376,3 +7376,39 @@ code.element::after {
       padding-left: 10rem !important;
    }
 }
+
+.menu-item .subtext {
+   position: absolute;
+   visibility: hidden;
+   height: 100%; 
+   width: 100%;
+   font-size: 1.2rem;
+   left: -20px;
+   line-height: 5rem;
+}
+
+.menu-item:hover .subtext {
+   height: auto;
+   width: auto;
+   visibility: visible;
+   text-align: center;
+   display: block;
+   color: var(--dark-gray);
+   left: 35px;
+   transition-duration: 1s;
+}
+
+.menu-item.subtext {
+   position: relative;
+   right: 0;
+}
+
+.menu-item.subtext:hover {
+   position: relative;
+   right: 35px;
+   transition-duration: 1s;
+}
+
+.menu-item:hover a {
+   color: var(--accent);
+}
