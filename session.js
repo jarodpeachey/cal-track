@@ -125,6 +125,9 @@ const sessionControl = (function () {
 
          // Display user dashboard
          sessionUIControl.displayDashboard(user);
+
+         // Load events
+         mainDataControl.loadEventListeners();
       }
    }
 })()

@@ -34,6 +34,10 @@ const mainDataControl = (function () {
       getCurrentUser: function() {
          return JSON.parse(localStorage.getItem('currentUser'));
       },
+      clearCurrentUser: function() {
+         localStorage.removeItem('currentUser');
+         window.location.href = 'index.html';
+      },
       getUserByUsername: function(username) {
          let users = storageControl.getUsers();
          let found = null;
@@ -222,6 +226,14 @@ const mainDataControl = (function () {
 
          localStorage.setItem('users', JSON.stringify(usersArray));
          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      }, 
+      loadEventListeners: function () {
+         document.querySelector('.logout').addEventListener('click', function(e) {
+            if(confirm('Are you sure you want to log out?')) {
+               mainDataControl.clearCurrentUser();
+            }
+            e.preventDefault();
+         })
       }
    }
 })()

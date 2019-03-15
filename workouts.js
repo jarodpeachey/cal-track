@@ -420,6 +420,9 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
 
          // Load event listeners
          loadEventListeners();
+
+         // Load events for logout
+         mainDataControl.loadEventListeners();
       }
    }
 
@@ -427,5 +430,3 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
 
 // Initialize App
 appControl.init();
-
-console.log('On page startup, current user is', mainDataControl.getCurrentUser());

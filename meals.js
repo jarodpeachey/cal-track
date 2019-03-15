@@ -426,6 +426,9 @@ const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
 
          // Load event listeners
          loadEventListeners();
+
+         // Load events for logout
+         mainDataControl.loadEventListeners();
       }
    }
 
@@ -433,5 +436,3 @@ const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
 
 // Initialize App
 appControl.init();
-
-console.log('On page startup, current user is', mainDataControl.getCurrentUser());
