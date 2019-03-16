@@ -942,6 +942,17 @@ ul ul {
    padding-bottom: 3rem !important;
 }
 
+@media (max-width: 600px) {
+   .menu-item .subtext {
+      display: none !important;
+   }
+
+   .menu-item.subtext:hover {
+      position: relative;
+      right: 0 !important;
+   }
+}
+
 .menu-item .subtext {
    position: absolute;
    visibility: hidden;
@@ -1015,8 +1026,30 @@ ul ul {
    z-index: -1 !important;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 720px) {
+   .navbar-right > .menu {
+      padding-top: 15px;
+   }
+
    .navbar-content {
-      padding-bottom: 0px !important;
+      padding-bottom: 0 !important;
+   }
+
+   .menu-item {
+      padding-bottom: 10px;
+      height: 100% !important;
+   }
+
+   .menu-item:hover .menu {
+      margin-top: 5px;
+      z-index: 20;
+      position: fixed;
+   }
+
+   .menu-item .menu .menu-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
    }
 }
