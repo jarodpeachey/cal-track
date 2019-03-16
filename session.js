@@ -34,15 +34,22 @@ const sessionUIControl = (function () {
             workouts.splice(2);
          }
 
-         meals.forEach(function(meal) {
+         meals.forEach(function (meal) {
             displayMeals += `<li class="collection-item"><strong>${meal.name}</strong> <em class="right">${meal.calories} calories gained</em></li>`
          })
 
-         workouts.forEach(function(workout) {
+         workouts.forEach(function (workout) {
             displayWorkouts += `<li class="collection-item"><strong>${workout.name}</strong> <em class="right">${workout.calories} calories gained</em></li>`
          })
 
-         if (user.workouts == '' && user.meals == '') {
+         if (!user) {
+            container.innerHTML = `
+            <div class="center-text">
+               <h2>You're not logged in to your account.  Please    <a href="login.html">login</a>   or <a     href="signup.html">sign up</a>  to view your account.
+               </h2>
+            </div>
+            `;
+         } else if (user.workouts == '' && user.meals == '') {
             container.innerHTML = `
             <div class="m-auto center-text">
             <h1 class="title">Welcome, ${user.name}!</h1>
@@ -120,14 +127,24 @@ const sessionUIControl = (function () {
 const sessionControl = (function () {
    return {
       startNewSession: function () {
-         // Get current user
-         const user = mainDataControl.getCurrentUser();
+         if (!mainDataControl.getCurrentUser()) {
+            document.getElementById('container').innerHTML = `
+               <div class="center-text">
+                  <h2>You're not logged in to your account.  Please    <a href="login.html">login</a>   or <a     href="signup.html">sign up</a>  to view your meals.
+               </h2>
+            </div>
+            `
+         } else {
+            // Get current user
+            const user = mainDataControl.getCurrentUser();
 
-         // Display user dashboard
-         sessionUIControl.displayDashboard(user);
+            // Display user dashboard
+            sessionUIControl.displayDashboard(user);
 
-         // Load events
-         mainDataControl.loadEventListeners();
+            // Load events
+            mainDataControl.loadEventListeners();
+         }
+
       }
    }
 })()

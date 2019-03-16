@@ -409,26 +409,36 @@ const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
    // Public methods
    return {
       init: function () {
-         // Clear edit state
-         mealUIControl.clearEditState();
+         if (!mainDataControl.getCurrentUser()) {
+            document.getElementById('container').innerHTML = `
+            <div class="center-text">
+               <h2>You're not logged in to your account.  Please    <a href="login.html">login</a>   or <a     href="signup.html">sign up</a>  to view your meals.
+               </h2>
+            </div>
+            `
+         } else {
+            // Clear edit state
+            mealUIControl.clearEditState();
 
-         // Fetch items from data structure
-         const items = mealItemControl.getItems();
+            // Fetch items from data structure
+            const items = mealItemControl.getItems();
 
-         // Populate list with items
-         mealUIControl.populateItemList(items);
+            // Populate list with items
+            mealUIControl.populateItemList(items);
 
-         // Get total calories and update
-         const totalCalories = mainDataControl.getCaloriesGained();
+            // Get total calories and update
+            const totalCalories = mainDataControl.getCaloriesGained();
 
-         // Display calories
-         mealUIControl.displayCalories(totalCalories);
+            // Display calories
+            mealUIControl.displayCalories(totalCalories);
 
-         // Load event listeners
-         loadEventListeners();
+            // Load event listeners
+            loadEventListeners();
 
-         // Load events for logout
-         mainDataControl.loadEventListeners();
+            // Load events for logout
+            mainDataControl.loadEventListeners();
+         }
+
       }
    }
 

@@ -977,3 +977,40 @@ ul ul {
 .menu-item:hover a {
    color: var(--accent);
 }
+
+.menu-item .menu {
+   display: none;
+}
+
+.menu-item.account:hover .menu {
+   display: block;
+   top: 100% !important;
+   position: absolute !important;
+   width: 180px !important;
+   margin-left: -58px !important;
+   background: #f1f1f1 !important;
+   border-top: none !important;
+   padding: 10px 0px !important;
+}
+
+.menu-item.account:hover .menu-item {
+   margin: 0 !important;
+   padding: 12.5px !important;
+}
+
+.menu-item.account:hover .menu-item:hover {
+   background: #e2e2e2 !important;
+}
+
+.menu-item.account:hover .menu::after {
+   content: '.' !important;
+   position: absolute !important;
+   top: -10px !important;
+   left: calc(50% - 13px) !important;
+   width: 20px !important;
+   height: 20px !important;
+   display: block !important;
+   transform: rotate(45deg) !important;
+   background: #f1f1f1 !important;
+   z-index: -1 !important;
+}

@@ -403,26 +403,35 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
    // Public methods
    return {
       init: function () {
-         // Clear edit state
-         workoutUIControl.clearEditState();
+         if (!mainDataControl.getCurrentUser()) {
+            document.getElementById('container').innerHTML = `
+            <div class="center-text">
+               <h2>You're not logged in to your account.  Please    <a href="login.html">login</a>   or <a     href="signup.html">sign up</a>  to view your workouts.
+               </h2>
+            </div>
+            `
+         } else {
+            // Clear edit state
+            workoutUIControl.clearEditState();
 
-         // Fetch items from data structure
-         const items = workoutItemControl.getItems();
+            // Fetch items from data structure
+            const items = workoutItemControl.getItems();
 
-         // Populate list with items
-         workoutUIControl.populateItemList(items);
+            // Populate list with items
+            workoutUIControl.populateItemList(items);
 
-         // Get total calories and update
-         const totalCalories = mainDataControl.getCaloriesLost();
+            // Get total calories and update
+            const totalCalories = mainDataControl.getCaloriesLost();
 
-         // Display calories
-         workoutUIControl.displayCalories(totalCalories);
+            // Display calories
+            workoutUIControl.displayCalories(totalCalories);
 
-         // Load event listeners
-         loadEventListeners();
+            // Load event listeners
+            loadEventListeners();
 
-         // Load events for logout
-         mainDataControl.loadEventListeners();
+            // Load events for logout
+            mainDataControl.loadEventListeners();
+         }
       }
    }
 

@@ -38,6 +38,23 @@ const mainDataControl = (function () {
          localStorage.removeItem('currentUser');
          window.location.href = 'index.html';
       },
+      deleteAccount: function(userToDelete) {
+         if (!userToDelete) {
+            document.write(`<h2>There is no user to delete.  Please <a href="login.html">login to your account</a> and delete it again.</h2>`);
+         } else {
+            const usersArray = storageControl.getUsers();
+
+            usersArray.forEach(function(user, index) {
+               if (userToDelete.username == user.username) {
+                  usersArray.splice(index, 1);
+               }
+            })
+
+            mainDataControl.clearCurrentUser();
+   
+            localStorage.setItem('users', JSON.stringify(usersArray));
+         }
+      },
       getUserByUsername: function(username) {
          let users = storageControl.getUsers();
          let found = null;
@@ -233,6 +250,12 @@ const mainDataControl = (function () {
                mainDataControl.clearCurrentUser();
             }
             e.preventDefault();
+         });
+
+         document.querySelector('.deleteAccount').addEventListener('click', function(e) {
+            if(confirm('Are you sure you want to permanantly delete your account?')) {
+               mainDataControl.deleteAccount(mainDataControl.getCurrentUser());
+            }
          })
       }
    }
