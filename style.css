@@ -3,7 +3,6 @@
 * Copyright 2019, Jarod Peachey
 */
 
-
 /* Base Styling 
 -----------------------------------------------------------------*/
 .demo {
@@ -97,8 +96,8 @@ html {
 /* LAYOUT AND GRID SYSTEM
 --------------------------------------------------------------- */
 .container {
-   margin: 0 auto;
-   width: 375px;
+   margin: 0 auto !important;
+   width: 90%;
    padding: 5rem 0;
 }
 
@@ -227,11 +226,16 @@ html {
    flex: 1 1 0;
 }
 
+.row {
+   margin: 0;
+}
+
 /* mobile-lg */
 @media(min-width: 540px) {
    .row.mobile-lg {
       display: flex;
       flex-wrap: wrap;
+      margin: 0 -8px 0 -8px;
    }
 
    .row.mobile-lg .auto,
@@ -438,6 +442,7 @@ html {
    .row {
       display: flex;
       flex-wrap: wrap;
+      margin: 0 -8px 0 -8px;
    }
 
    .row .col-1 {
@@ -704,6 +709,7 @@ html {
    .row.desktop {
       display: flex;
       flex-wrap: wrap;
+      margin: 0 -8px 0 -8px;
    }
 
    .row.desktop .col {
@@ -1020,6 +1026,7 @@ html {
    .row.widescreen {
       display: flex;
       flex-wrap: wrap;
+      margin: 0 -8px 0 -8px;
    }
 
    .row.widescreen .col {
@@ -1689,13 +1696,6 @@ html {
    }
 }
 
-.row {
-   margin: 0px;
-   padding: 0px;
-   margin-left: -8px;
-   margin-right: -8px;
-}
-
 /* TYPOGRAPHY
  ---------------------------------------------------------------
  ---------------------------------------------------------------*/
@@ -1839,8 +1839,7 @@ input[type="button"] {
    font-weight: 500;
    font-size: 1.5rem;
    border-radius: 4px;
-   margin: 1rem 0px;
-   margin-right: 10px;
+   margin: 8px;
    text-align: center;
    text-transform: uppercase;
 }
