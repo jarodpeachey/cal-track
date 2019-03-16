@@ -629,6 +629,11 @@ ul ul {
    border-bottom-left-radius: 4px;
 }
 
+.collection-item .right {
+   float: right;
+   padding-right: 10px;
+}
+
 /* Tables
  ---------------------------------------------------------------
  ---------------------------------------------------------------*/
