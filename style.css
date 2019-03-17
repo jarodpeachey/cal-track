@@ -519,7 +519,7 @@ legend {
 }
 
 .input-element {
-   margin: 0 0 1rem 0;
+   margin: 0 0 1.6rem 0;
    display: block;
 }
 
@@ -544,20 +544,20 @@ legend {
 
 @media (min-width: 540px) {
    .input-element {
-      margin: 0 0 1.4rem 0;
+      margin: 0 0 1.8rem 0;
    }
 }
 
 @media (min-width: 769px) {
    .input-element {
-      margin: 0 0 1.8rem 0;
+      margin: 0 0 2rem 0;
    }
 }
 
 @media (min-width: 1024px) {
 
      .input-element {
-      margin: 0 0 2rem 0;
+      margin: 0 0 2.2rem 0;
    }
 }
 
