@@ -13,77 +13,105 @@
 
 <body>
    <nav class="navbar white" style="border-bottom: 2px solid #00c6e0;">
-      <div class="navbar-content">
-         <div class="navbar-left center-text tablet-text-align-left">
+      <div class="navbar-content px-2 desktop-px-6">
+         <div class="navbar-left text-align-left">
             <h1>CalTrack</h1>
          </div>
          <div class="navbar-right">
-            <ul class="menu">
-               <li class="menu-item subtext mr-2 workouts">
+            <ul class="menu hidden-below-tablet">
+               <li class="menu-item subtext tablet-mr-0 desktop-mr-2 workouts">
                   <a href="workouts.html">
-                     <i class="fas fa-running fa-2x"></i>
+                     <i class="fas fa-running fa-2x hidden-below-desktop"></i><span class="hidden-above-desktop">Workouts</span>
                   </a>
-                  <div class="subtext"><a href="workouts.html">Workouts</a></div>
+                  <div class="subtext hidden-below-desktop"><a href="workouts.html">Workouts</a></div>
                </li>
-               <li class="menu-item subtext mr-2 meals">
+               <li class="menu-item subtext tablet-mr-0 desktop-mr-2 meals">
                   <a href="meals.html">
-                     <i class="fas fa-hamburger fa-2x"></i>
+                     <i class="fas fa-hamburger fa-2x hidden-below-desktop"></i><span class="hidden-above-desktop">Meals</span>
                   </a>
-                  <div class="subtext meals"><a href="meals.html">Meals</a></div>
+                  <div class="subtext hidden-below-desktop"><a href="meals.html">Meals</a></div>
                </li>
-               <li class="menu-item subtext mr-2 dashboard">
+               <li class="menu-item subtext tablet-mr-0 desktop-mr-2  dashboard">
                   <a href="dashboard.html">
-                     <i class="fas fa-th-large fa-2x"></i>
+                     <i class="fas fa-th-large fa-2x hidden-below-desktop"></i><span class="hidden-above-desktop">Dashboard</span>
                   </a>
-                  <div class="subtext"><a href="dashboard.html">Dashboard</a></div>
+                  <div class="subtext hidden-below-desktop"><a href="dashboard.html">Dashboard</a></div>
                </li>
-               <li class="menu-item account">
-                  <a>
-                     <i class="fa fa-user fa-2x"></i>
+               <li class="menu-item subtext account">
+                  <a href="account.html">
+                     <i class="fas fa-user fa-2x hidden-below-desktop"></i><span class="hidden-above-desktop">Log Out</span>
                   </a>
-                  <ul class="menu">
-                     <li class="menu-item logout"> Logout
-                     </li>
-                     <li class="menu-item deleteAccount">
+                  <div class="subtext hidden-below-desktop"><a href="account.html">Account</a></div>
+                  <ul class="menu hidden-below-desktop">
+                     <li class="menu-item logout">Logout</li>
+                     <li class="menu-item logout">Delete Account</li>
+                  </ul>
+               </li>
+               <li class="menu-item hidden-above-desktop deleteAccount">
+                  <a class="deleteAccount">Delete Account</a>
+               </li>
+            </ul>
+            <ul class="menu mobile-menu hidden-above-tablet">
+               <li class="menu-item">
+                  <i class="fa fa-bars fa-2x" id="mobileMenu"></i>
+                  <ul class="mobile-menu unclicked" id="mobileSubmenu">
+                     <a href="workouts.html" class="menu-item workouts">
+                        Workouts
+                     </a>
+                     <a href="meals.html" class="menu-item meals">
+                        Meals
+                     </a>
+                     <a href="dashboard.html" class="menu-item dashboard">
+                        Dashboard
+                     </a>
+                     <a class="menu-item logout">
+                        Logout
+                     </a>
+                     <a class="menu-item deleteAccount">
                         Delete Account
-                     </li>
+                     </a>
                   </ul>
                </li>
             </ul>
          </div>
       </div>
    </nav>
-   <section>
+   <section class="bg-light">
       <div class="container" id="container" style="max-width: 800px; margin: 0 auto;">
-         <div class="bg-light">
-            <div style="padding: 10px;">
-               <div id="warning-box" style="color: #ce1c2e;
+         <div>
+            <div id="warning-box" style="color: #ce1c2e;
                background-color: #eebabe; padding: 10px; border-radius: 4px; display: none;"></div>
-               <h3>Add Workout</h3>
-               <form action="">
-                  <div class="row mobile-lg">
-                     <div class="col-6 col">
-                        <div class="input-element medium">
-                           <label for="">Workout Description</label>
-                           <input class="full-width" type="text" id="item-name" placeholder="Add item...">
-                        </div>
-                     </div>
-                     <div class="col-6 col">
-                        <div class="input-element medium">
-                           <label for="">Calories Burned</label>
-                           <input class="full-width" type="number" placeholder="Add calories" id="item-calories">
-                        </div>
-                     </div>
-                     <div class="col-12 col">
-                        <button class="m-0 add-btn link"><i class="fa fa-plus"></i> Add Workout</button>
-                        <button class="m-0 update-btn accent"><i class="fa fa-pencil-square-o"></i> Update Workout</button>
-                        <button class="m-0 delete-btn danger"><i class="fa fa-remove"></i> Delete Workout</button>
-                        <button class="m-0 back-btn light float-right"><i class="fa fa-chevron-circle-left"></i> Back</button>
+
+            <form action="">
+               <div class="row mobile-lg">
+                  <div class="col col-12">
+                     <h3>Add Workout</h3>
+                  </div>
+                  <div class="col-6 col">
+                     <div class="input-element medium">
+                        <label for="">Workout Description</label>
+                        <input class="full-width" type="text" id="item-name" placeholder="Add item...">
                      </div>
                   </div>
-               </form>
-            </div>
+                  <div class="col-6 col">
+                     <div class="input-element medium">
+                        <label for="">Calories Burned</label>
+                        <input class="full-width" type="number" placeholder="Add calories" id="item-calories">
+                     </div>
+                  </div>
+                  <div class="col-12 col">
+                     <button class="add-btn link"><i class="fa fa-plus"></i> Add Workout</button>
+                     <button class="update-btn accent"><i class="fa fa-pencil-square-o"></i> Update Workout</button>
+                     <button class="delete-btn danger"><i class="fa fa-remove"></i> Delete Workout</button>
+                     <button class="back-btn light float-right"><i class="fa fa-chevron-circle-left"></i> Back</button>
+                  </div>
+               </div>
+            </form>
          </div>
+      </div>
+   </section>
+   <section>
+      <div class="container" style="max-width: 800px; margin: 0 auto;">
          <h2 class="center-text py-3">Total Calories Burned: <span class="total-calories"></span></h2>
 
          <ul id="item-list" class="collection">
