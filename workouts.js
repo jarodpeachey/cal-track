@@ -80,10 +80,8 @@ const workoutItemControl = (function () {
       },
       deleteAllItems: async function () {
          if (confirm('Are you sure you want to delete all items?')) {
-            data.items.splice(0);
+            document.getElementById('item-list').innerHTML = '';
          }
-
-         await console.log(data.items);
       },
       setCurrentItem: function (item) {
          data.currentItem = item;
