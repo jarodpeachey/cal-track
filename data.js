@@ -267,6 +267,14 @@ const mainDataControl = (function () {
             }
          });
 
+         document.addEventListener('touchstart', function (e) {
+            if (e.target.classList.contains('logout')) {
+               if (confirm('Are you sure you want to log out?')) {
+                  mainDataControl.clearCurrentUser();
+               }
+            }
+         });
+
          document.addEventListener('click', function (e) {
             if (e.target.classList.contains('deleteAccount')) {
                if (confirm('Are you sure you want to permanantly delete your account?')) {
@@ -275,24 +283,13 @@ const mainDataControl = (function () {
             }
          });
 
-         document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('meals')){
-               window.location.href = 'meals.html';
+         document.addEventListener('touchstart', function (e) {
+            if (e.target.classList.contains('deleteAccount')) {
+               if (confirm('Are you sure you want to permanantly delete your account?')) {
+                  mainDataControl.deleteAccount(mainDataControl.getCurrentUser());
+               }
             }
-         })
-
-         document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('workouts')){
-               window.location.href = 'workouts.html';
-            }
-         })
-
-         
-         document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('dashboard')){
-               window.location.href = 'dashboard.html';
-            }
-         })
+         });
       }
    }
 })()
