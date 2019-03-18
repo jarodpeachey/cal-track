@@ -293,7 +293,6 @@ const appControl = (function (mealItemControl, mealUIControl, mainDataControl) {
          // Add item to form
          mealUIControl.addCurrentItemToForm(mealItemControl.getCurrentItem());
       }
-      e.preventDefault();
    }
 
    // Update function

@@ -292,7 +292,6 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
          // Add item to form
          workoutUIControl.addCurrentItemToForm(workoutItemControl.getCurrentItem());
       }
-      e.preventDefault();
    }
 
    // Update function
