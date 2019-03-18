@@ -19,8 +19,23 @@
                <h1 class="m-0">CalTrack</h1>
             </div>
             <div class="navbar-right">
-               <a href="login.html" class="button primary mr-1">Log In</a>
-               <a href="signup.html" class="button accent">Sign Up</a>
+               <div class="hidden-below-tablet">
+                  <a href="login.html" class="button primary mr-1">Log In</a>
+                  <a href="signup.html" class="button accent">Sign Up</a>
+               </div>
+               <ul class="menu mobile-menu hidden-above-tablet">
+                  <li class="menu-item">
+                     <i class="fa fa-bars fa-2x menu-icon-index" id="mobileMenu"></i>
+                     <ul class="mobile-menu unclicked" id="mobileSubmenu">
+                        <a href="login.html" class="menu-item">
+                           Login
+                        </a>
+                        <a href="signup.html" class="menu-item">
+                           Sign Up
+                        </a>
+                     </ul>
+                  </li>
+               </ul>
             </div>
          </div>
       </nav>
@@ -29,12 +44,14 @@
             <div class="container center-text" style="max-width: 650px;">
                <i class="fas fa-running fa-5x"></i>
                <h1 class='title'>Step up your exercise game with CalTrack</h1>
-               <h4 class="subtitle">CalTrack is the number one calories tracking app on the market.  See why today.</h4>
+               <h4 class="subtitle">CalTrack is the number one calories tracking app on the market. See why today.</h4>
                <a href="signup.html" class="button accent large">Get Started</a>
             </div>
          </div>
       </div>
    </section>
+   <script src="data.js"></script>
+   <script>mainDataControl.loadEventListeners()</script>
 </body>
 
 </html>
