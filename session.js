@@ -12,7 +12,7 @@ const sessionUIControl = (function () {
          }
 
          if (user.caloriesLost == 0) {
-            workoutButton = `You don't have any workouts yet. <br><br><a href="workouts.html" class="button accent">Add Meal</a>`;
+            workoutButton = `You don't have any workouts yet. <br><br><a href="workouts.html" class="button accent">Add Workout</a>`;
          }
 
          if (user.netCalories <= 0) {
