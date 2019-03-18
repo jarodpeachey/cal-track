@@ -78,13 +78,6 @@ const mealItemControl = (function () {
 
          return itemToDelete;
       },
-      deleteAllItems: async function () {
-         if (confirm('Are you sure you want to delete all items?')) {
-            data.items.splice(0);
-         }
-
-         await console.log(data.items);
-      },
       setCurrentItem: function (item) {
          data.currentItem = item;
          console.log(data.currentItem);

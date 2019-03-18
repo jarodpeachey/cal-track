@@ -78,13 +78,6 @@ const workoutItemControl = (function () {
 
          return itemToDelete;
       },
-      deleteAllItems: async function () {
-         if (confirm('Are you sure you want to delete all items?')) {
-            data.items.splice(0);
-         }
-
-         await console.log(data.items);
-      },
       setCurrentItem: function (item) {
          data.currentItem = item;
          console.log(data.currentItem);
@@ -190,6 +183,11 @@ const workoutUIControl = (function () {
 
          // Clear edit state
          workoutUIControl.clearEditState();
+      },
+      deleteAllItems: function() {
+         const list = document.querySelector(UISelectors.itemList);
+
+         list.innerHTML = '';
       },
       getSelectors: function () {
          return UISelectors;
@@ -364,7 +362,7 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
       e.preventDefault();
    }
 
-   const clearAllItems = function (e) {
+   const clearAllItems = async function (e) {
       if (confirm('Are you sure you want to delete all items?')) {
          // Delete from data
          mainDataControl.deleteAllWorkouts();
@@ -373,13 +371,13 @@ const appControl = (function (workoutItemControl, workoutUIControl, mainDataCont
          workoutUIControl.deleteAllItems();
 
          // Update calories data structure
-         mainDataControl.updateUserCalories();
+         await mainDataControl.updateUserCalories();
 
          // Get total calories and update
          const totalCalories = mainDataControl.getCaloriesLost();
 
          // Display calories
-         workoutUIControl.displayCalories(totalCalories);
+         await workoutUIControl.displayCalories(totalCalories);
       }
 
       e.preventDefault();

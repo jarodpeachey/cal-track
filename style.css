@@ -1844,10 +1844,10 @@ input[type="button"] {
    text-transform: uppercase;
 }
 
-button a,
+a.button,
 .button,
 button a:visited,
-button a:hover {
+a.button:hover {
    color: white !important;
 }
 
