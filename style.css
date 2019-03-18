@@ -9548,10 +9548,12 @@ code.element::after {
 }
 
 .mobile-menu .menu-item .mobile-menu.clicked {
-   position: fixed;
    background: black;
-   width: 100vw;
-   left: 0;
+   position: absolute;
+   z-index: 500;
+   width: calc(100vw - 36px);
+   max-width: 100vw;
+   right: -9px;
    top: 80px;
 }
 
