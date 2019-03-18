@@ -27,11 +27,11 @@ const sessionUIControl = (function () {
          let displayWorkouts = '';
 
          if (meals.length > 3) {
-            meals.splice(2);
+            meals.splice(3);
          }
 
          if (workouts.length > 3) {
-            workouts.splice(2);
+            workouts.splice(3);
          }
 
          meals.forEach(function (meal) {
