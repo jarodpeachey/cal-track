@@ -36,7 +36,7 @@ const mainDataControl = (function () {
       },
       clearCurrentUser: function () {
          localStorage.removeItem('currentUser');
-         window.location.href = 'index.html';
+         window.location.href = 'main.html';
       },
       deleteAccount: function (userToDelete) {
          if (!userToDelete) {
