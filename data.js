@@ -244,7 +244,7 @@ const mainDataControl = (function () {
          localStorage.setItem('users', JSON.stringify(usersArray));
          localStorage.setItem('currentUser', JSON.stringify(currentUser));
       },
-      loadEventListeners: function () {
+      loadEventListeners: function (e) {
          document.getElementById('mobileMenu').addEventListener('click', function (e) {
             const menu = document.getElementById('mobileSubmenu');
 
@@ -265,8 +265,6 @@ const mainDataControl = (function () {
                   mainDataControl.clearCurrentUser();
                }
             }
-
-            e.preventDefault();
          });
 
          document.addEventListener('click', function (e) {
@@ -275,7 +273,6 @@ const mainDataControl = (function () {
                   mainDataControl.deleteAccount(mainDataControl.getCurrentUser());
                }
             }
-
          });
 
          document.addEventListener('click', function (e) {
