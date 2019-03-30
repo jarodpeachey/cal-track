@@ -2835,7 +2835,7 @@ label,
    }
 }
 
-textarea {
+textarea, input {
    font-family: 'Raleway';
 }
 
